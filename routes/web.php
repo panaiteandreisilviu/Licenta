@@ -11,18 +11,29 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// ----------------- FRONT PAGE -----------------------
 
-Route::get('/admin', function () {
-    return view('admin');
-});
+Route::get('/', "PostController@index")->name("frontpage");
+Route::get('/profile', "ProfileController@index")->name("profile");
 
-Route::get('/register', function () {
-    return view('register.create');
-});
+// ----------------- ADMIN -----------------------
 
-Route::get('/login', function () {
-    return view('session.create');
-});
+Route::get('/admin', "AdminController@index")->name("adminpage");
+
+Route::get('/admin/posts', "PostController@indexAdmin");
+
+Route::get('/admin/posts/create', "PostController@create");
+Route::post('/admin/posts/store', "PostController@store");
+
+Route::get('/admin/users', "UsersController@index");
+
+
+// ----------------- LOGIN / REGISTRATION -----------------------
+
+Route::get('/register', 'RegistrationController@create');
+Route::post('/register', 'RegistrationController@store');
+
+Route::get('/login', 'SessionsController@create')->name('login');
+Route::post('/login', 'SessionsController@store');
+
+Route::get('/logout', 'SessionsController@destroy');

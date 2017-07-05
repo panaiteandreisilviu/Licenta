@@ -25,6 +25,31 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
+
+            <li><a href="/admin/users"><i class="fa fa-user"></i> <span>Users</span></a></li>
+
+
+
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-book"></i> <span>Posts</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/admin/posts"><i class="fa fa-circle-o"></i> View all posts</a></li>
+                    <li class="active"><a href="/admin/posts/create"><i class="fa fa-circle-o"></i> Create a post</a></li>
+                </ul>
+            </li>
+
+
+
+
+
+            {{------------------------------------------}}
+
+
             <li class="active treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
