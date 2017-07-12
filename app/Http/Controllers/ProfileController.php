@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
+use App\UserProfile;
 use Illuminate\Http\Request;
-
+use App\User;
+use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
     /**
@@ -29,23 +32,23 @@ class ProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param UserProfile $userProfile
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserProfile $userProfile)
     {
-        //
+        return view('frontpage.profile.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        //
+        return view('frontpage.profile.show', compact('user'));
     }
 
     /**
@@ -62,13 +65,47 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param ProfileRequest $request
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProfileRequest $request, User $user)
     {
-        //
+//        $task = Task::findOrFail($id);
+//        $this->validate($request, [
+//            'title' => 'required',
+//            'description' => 'required'
+//        ]);
+//        $input = $request->all();
+//        $task->fill($input)->save();
+
+//        $input = $request->all();
+//        $user->fill($input);
+
+
+        Storage::put(
+            'public/avatars/'.$user->id,
+            file_get_contents($request->file('profilePicture')->getRealPath())
+        );
+
+
+        $userProfile = $user->profile;
+        if($userProfile){
+
+            $userProfile->profile_picture_filename = 'avatar/' . $user->id;
+            $user->profile()->save($userProfile);
+
+        } else {
+
+            $userProfile = new UserProfile([
+                'user_id' => $user->id,
+                'profile_picture_filename' => 'avatar/' . $user->id,
+            ]);
+            $user->profile()->save($userProfile);
+        }
+
+
+        return back();
     }
 
     /**

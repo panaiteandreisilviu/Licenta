@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use App\Notifications\PostPublished;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
@@ -20,11 +21,23 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = \App\Post::all()->sortByDesc("created_at");
+
+//        $posts = \App\Post::all()->sortByDesc("created_at");
+        $posts = \App\Post::latest();
+
+        if($month = request('month')){
+            $posts->whereMonth('created_at', $month);
+        }
+        if($year = request('year')){
+            $posts->whereYear('created_at', $year);
+        }
+
+        $posts = $posts->get();
+
         return view('frontpage.posts.index', compact('posts'));
     }
 
-    public function indexAdmin(){
+    public function indexAdmin() {
 
 
         request()->user()->authorizeRoles(['admin']);
@@ -46,20 +59,35 @@ class PostController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(Request $request)
     {
         // REDIRECTS TO SAME PAGE IF VALIDATION FAILS !!
         $this->validate(request(), [
             'title' => 'required',
             'body' => 'required',
+            'image' => 'image|mimes:jpeg,png'
         ]);
 
+        $imageHashName = "";
+        if(request('image')) {
+            $imageHashName = request()->file('image')->hashName();
+            Storage::put(
+                'public/post_images/' . $imageHashName,
+                file_get_contents(request()->file('image')->getRealPath())
+            );
+        }
         Post::create([
             'title' => request('title'),
             'body' => request('body'),
             'user_id' => auth()->id(),
+            'image_path' => $imageHashName,
         ]);
+
+        $post = Post::orderBy('created_at', 'desc')->first();
+        $post->notify(new PostPublished());
 
         return back();
     }
@@ -72,7 +100,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('frontpage.posts.show', compact('post'));
     }
 
     /**

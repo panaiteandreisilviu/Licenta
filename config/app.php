@@ -178,6 +178,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Nwidart\Modules\LaravelModulesServiceProvider::class,
+        NotificationChannels\Twitter\TwitterServiceProvider::class,
+        NotificationChannels\FacebookPoster\FacebookPosterServiceProvider::class,
+        Webklex\IMAP\Providers\LaravelServiceProvider::class,
 
     ],
 
@@ -229,6 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Module' => Nwidart\Modules\Facades\Module::class,
+        'Client' => Webklex\IMAP\Facades\Client::class
 
     ],
 

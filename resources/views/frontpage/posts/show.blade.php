@@ -16,26 +16,12 @@
 
 
     <div class="col-sm-8 col-xs-12">
-        @foreach($posts as $post)
             <div class="box box-widget {{--collapsed-box--}}">
                 <div class="box-header with-border">
                     <div class="user-block">
-
-                        <img class="img-circle" src="storage/avatars/{{$post->user()->id}}" onerror="this.src='storage/avatars/default'" alt="User Image">
-
-                        <span class="username">
-                            <a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a>
-
-                            <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> -
-                                <a href="/post/{{$post->id}}">
-                                    {{$post->title}}
-                                </a>
-                            </span>
-
-                        </span>
-
+                        <img class="img-circle" src="/storage/avatars/{{$post->user()->id}}" onerror="this.src='storage/avatars/default'" alt="User Image">
+                        <span class="username"><a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a> <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> - {{$post->title}}</span></span>
                         <span class="description">{{$post->created_at->diffForHumans()}}</span>
-
                     </div>
                     <!-- /.user-block -->
                     <div class="box-tools">
@@ -50,11 +36,7 @@
                 <!-- /.box-header -->
                 <div class="box-body">
                     <!-- post text -->
-                    <h4 class="hidden-md hidden-lg">
-                        <a href="/post/{{$post->id}}">
-                            {{$post->title}}
-                        </a>
-                    </h4>
+                    <h4 class="hidden-md hidden-lg">{{$post->title}}</h4>
                     {!!$post->body !!}
 
                     <img src="/storage/post_images/{{$post->image_path}}" onerror="" class="img-responsive pad" alt="">
@@ -115,7 +97,6 @@
                 </div>
                 <!-- /.box-footer -->
             </div>
-        @endforeach
     </div>
 
     <div class="col-sm-4 hidden-xs">

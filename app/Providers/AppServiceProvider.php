@@ -13,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('layouts.top-nav.sidebar', function($view){
+            $posts = \App\Post::latest();
+            $postCount = $posts->count();
+            $view->with(['archives' => \App\Post::archives(), 'postCount' => $postCount]);
+        });
     }
 
     /**

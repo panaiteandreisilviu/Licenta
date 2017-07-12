@@ -14,8 +14,12 @@
 // ----------------- FRONT PAGE -----------------------
 
 Route::get('/', "PostController@index")->name("frontpage");
-Route::get('/profile', "ProfileController@index")->name("profile");
+Route::get('/posts', "PostController@index");
+Route::get('/post/{post}', "PostController@show");
 
+//Route::get('/profile', "ProfileController@index");
+Route::get('/profile/{user}', "ProfileController@show");
+Route::post('/profile/{user}', "ProfileController@update");
 // ----------------- ADMIN -----------------------
 
 Route::get('/admin', "AdminController@index")->name("adminpage");
@@ -26,6 +30,8 @@ Route::get('/admin/posts/create', "PostController@create");
 Route::post('/admin/posts/store', "PostController@store");
 
 Route::get('/admin/users', "UsersController@index");
+
+Route::get('/admin/mail', "MailController@index");
 
 
 // ----------------- LOGIN / REGISTRATION -----------------------

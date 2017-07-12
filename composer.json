@@ -6,9 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "laravel-notification-channels/facebook-poster": "^1.0",
+        "laravel-notification-channels/twitter": "^1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
-        "nwidart/laravel-modules": "^1.25"
+        "nwidart/laravel-modules": "^1.25",
+        "webklex/laravel-imap": "1.0.2.8"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -22,15 +22,21 @@
 
                     @include('layouts.errors')
 
-                    <form method="POST" action="/admin/posts/store">
+                    <form method="POST" action="/admin/posts/store" enctype="multipart/form-data">
+
                         {{csrf_field()}}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Title</label>
-                            <input type="text" class="form-control" name=title id="post_title" placeholder="Enter email">
+                            <label for="exampleInputEmail1">Post title</label>
+                            <input type="text" class="form-control" name=title id="post_title" placeholder="Post title">
                         </div>
 
                         <div class="form-group">
-                            <label for="post_editor">Body</label>
+                            <label for="post_image" class="control-label">Post image</label>
+                            <input type="file" name="image" id="post_image">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post_editor">Post body</label>
                             <textarea id="post_editor" name="body" rows="10" cols="80"></textarea>
                         </div>
 

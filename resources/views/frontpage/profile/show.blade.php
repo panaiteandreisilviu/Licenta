@@ -7,9 +7,8 @@
             <!-- Profile Image -->
             <div class="box box-primary">
                 <div class="box-body box-profile">
-                    <img class="profile-user-img img-responsive img-circle" src="AdminLTE-2.3.11/dist/img/user4-128x128.jpg" alt="User profile picture">
-
-                    <h3 class="profile-username text-center">Nina Mcintire</h3>
+                    <img class="profile-user-img img-responsive img-circle" alt="User profile picture" src="{{ asset('storage/avatars/' . $user->id) }}" onerror="this.src='/storage/avatars/default'"/>
+                    <h3 class="profile-username text-center">{{$user->name}}</h3>
     
                     <p class="text-muted text-center">Software Engineer</p>
     
@@ -291,14 +290,15 @@
                         </ul>
                     </div>
                     <!-- /.tab-pane -->
-    
+
+                    @include('layouts.errors')
+
                     <div class="tab-pane" id="personal_info">
-                        <form class="form-horizontal" action="/profile{{$user->id}}">
+                        <form method="POST" class="form-horizontal" action="/profile/{{$user->id}}" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            {{ method_field('PATCH') }}
                             <div class="form-group">
                                 <label for="profilePicture" class="col-sm-2 control-label">Profile picture</label>
-                                <input type="file" id="profilePicture">
+                                <input type="file" name="profilePicture" id="profilePicture">
                             </div>
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Name</label>
