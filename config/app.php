@@ -182,6 +182,8 @@ return [
         NotificationChannels\FacebookPoster\FacebookPosterServiceProvider::class,
         Webklex\IMAP\Providers\LaravelServiceProvider::class,
 
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+
     ],
 
     /*
@@ -232,7 +234,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Module' => Nwidart\Modules\Facades\Module::class,
-        'Client' => Webklex\IMAP\Facades\Client::class
+        'Client' => Webklex\IMAP\Facades\Client::class,
+        'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
 
     ],
 
