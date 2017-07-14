@@ -116,6 +116,8 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     // This will only work if you've added the SyncableGraphNodeTrait to your User model.
     $user = App\User::createOrUpdateGraphNode($facebook_user);
 
+    dd($user);
+
     // Log the user into Laravel
     Auth::login($user);
 
