@@ -13,7 +13,10 @@ class SessionsController extends Controller
 
     public function create()
     {
-        return view('frontpage.sessions.create');
+        $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+        $facebook_login_url = $fb->getLoginUrl(['email']);
+
+        return view('frontpage.sessions.create', compact('facebook_login_url'));
     }
 
     public function store()
