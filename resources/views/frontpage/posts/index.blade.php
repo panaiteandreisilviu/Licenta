@@ -101,19 +101,16 @@
                     {{--</div>--}}
                     {{--<!-- /.box-comment -->--}}
                 {{--</div>--}}
-
                 <!-- /.box-footer -->
-                @if(Auth::check())
-                @endif
                 <div class="box-footer">
                     <form action="#" method="post">
-                        <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user()->id}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
+                        <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user() ? Auth::user()->id : null}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
                         <div class="img-push">
                             <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
                         </div>
                     </form>
                 </div>
-                <!-- /.box-footer -->
+            <!-- /.box-footer -->
             </div>
         @endforeach
     </div>
