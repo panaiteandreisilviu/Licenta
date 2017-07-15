@@ -65,6 +65,7 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     if (! $token) {
         // Get the redirect helper
         $helper = $fb->getRedirectLoginHelper();
+        $_SESSION['FBRLH_state']=$_GET['state'];
 
         if (! $helper->getError()) {
             abort(403, 'Unauthorized action.');
