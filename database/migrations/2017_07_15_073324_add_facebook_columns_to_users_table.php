@@ -14,7 +14,6 @@ class AddFacebookColumnsToUsersTable extends Migration
             $table->bigInteger('facebook_user_id')->unsigned()->index()->nullable();
             // Normally you won't need to store the access token in the database
             $table->string('access_token')->nullable();
-            $table->string('facebook_full_name')->nullable();
         });
     }
 
@@ -24,8 +23,7 @@ class AddFacebookColumnsToUsersTable extends Migration
         {
             $table->dropColumn(
                 'facebook_user_id',
-                'access_token',
-                'facebook_full_name'
+                'access_token'
             );
         });
     }
