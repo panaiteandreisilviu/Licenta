@@ -20,11 +20,12 @@ class User extends Authenticatable
         'name', 'email', 'password', 'facebook_user_id'
     ];
 
-    protected static $graph_node_fillable_fields = ['id', 'name', 'start_time'];
+    protected static $graph_node_fillable_fields = ['id', 'name', 'email', 'start_time'];
 
     protected static $graph_node_field_aliases = [
         'id' => 'facebook_user_id',
         'name' => 'name',
+        'email' => 'email',
 //        'graph_node_field_name' => 'database_column_name',
     ];
 
