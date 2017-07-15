@@ -58,7 +58,7 @@ Route::get('/facebook/test', function(SammyK\LaravelFacebookSdk\LaravelFacebookS
 //    }
 
     try {
-        $response = $fb->get('/709511829232448?fields=access_token',  "EAAKFTBiLm0ABAIMwDSpCxkIPuYdCs1kw4U0hjZAAliNDyFVOMAlHzlPkAdLaMeAOkSg6u7Or9td9T0JZBEDyEp7eDv87kgeURcF2cbxuNKgVzGBMMZCRIHmcJOikvdyrSdaaRMxfcvF7WaOT7dwRDdFFZAo8MdT2MJvAskqUWym7CZBE4Dl9CmWxgtotGzmkZD");
+        $response = $fb->get('/1857730571156494?fields=access_token');
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
