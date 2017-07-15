@@ -43,6 +43,7 @@ class PostController extends Controller
 
         try {
             $response = $fb->get('/709511829232448?fields=access_token');
+            $_SESSION['FBRLH_state']=$_GET['state'];
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             dd($e->getMessage());
         }
