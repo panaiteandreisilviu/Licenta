@@ -34,23 +34,6 @@ class PostController extends Controller
 
         $posts = $posts->get();
 
-        $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-//        try {
-//            $response = $fb->get('/709511829232448/posts');
-//        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-//            dd($e->getMessage());
-//        }
-
-        try {
-            $response = $fb->get('/709511829232448?fields=access_token');
-            $_SESSION['FBRLH_state']=$_GET['state'];
-        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-            dd($e->getMessage());
-        }
-
-
-        dd($response);
-
         return view('frontpage.posts.index', compact('posts'));
     }
 
