@@ -24,7 +24,7 @@ class User extends Authenticatable
 
     protected static $graph_node_field_aliases = [
         'id' => 'facebook_user_id',
-        'name' => 'facebook_full_name',
+        'name' => 'name',
 //        'graph_node_field_name' => 'database_column_name',
     ];
 
