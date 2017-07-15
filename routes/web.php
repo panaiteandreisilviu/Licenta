@@ -49,6 +49,10 @@ Route::get('/logout', 'SessionsController@destroy');
 // Endpoint that is redirected to after an authentication attempt
 Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
+    if(!session_id()) {
+        session_start();
+    }
+
     // Obtain an access token.
     try {
         $token = $fb->getAccessTokenFromRedirect();
