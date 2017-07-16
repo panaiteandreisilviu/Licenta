@@ -30,7 +30,6 @@
                         <th>Email</th>
                         <th>Created at</th>
                         <th>Active</th>
-                        <th>Inactive Date</th>
                         <th>Role</th>
                         <th>Actions</th>
                     </tr>
@@ -49,16 +48,11 @@
                                     <span class="label label-danger"> <i class="fa fa-times"></i> No &nbsp;</span>
                                 @endif
                             </td>
-                            <td>-</td>
-                            <td>{{$user->role_name}}</td>
+                            <td>-role-</td>
                             <td>
-                                <button class="btn btn-primary btn-xs">
+                                <a href="/admin/users/" class="btn btn-primary btn-xs">
                                     <i class="fa fa-edit"></i> Edit
-                                </button>
-
-                                <button class="btn btn-danger btn-xs">
-                                    <i class="fa fa-times"></i> Inactivate
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

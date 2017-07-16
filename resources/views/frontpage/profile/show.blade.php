@@ -14,13 +14,13 @@
     
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <b>Followers</b> <a class="pull-right">1,322</a>
+                            <b>Followers</b> <a class="pull-right">-</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Following</b> <a class="pull-right">543</a>
+                            <b>Following</b> <a class="pull-right">-</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Friends</b> <a class="pull-right">13,287</a>
+                            <b>Friends</b> <a class="pull-right">-</a>
                         </li>
                     </ul>
     
@@ -40,32 +40,33 @@
                     <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
     
                     <p class="text-muted">
-                        B.S. in Computer Science from the University of Tennessee at Knoxville
+                        {{$user->profile ? $user->profile->education : ''}}
                     </p>
     
                     <hr>
     
                     <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
     
-                    <p class="text-muted">Malibu, California</p>
+                    <p class="text-muted">{{$user->profile ? $user->profile->location : ''}}</p>
     
                     <hr>
     
                     <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
     
                     <p>
-                        <span class="label label-danger">UI Design</span>
+                        {{$user->profile ? $user->profile->skills : ''}}
+                        {{--<span class="label label-danger">UI Design</span>
                         <span class="label label-success">Coding</span>
                         <span class="label label-info">Javascript</span>
                         <span class="label label-warning">PHP</span>
-                        <span class="label label-primary">Node.js</span>
+                        <span class="label label-primary">Node.js</span>--}}
                     </p>
     
                     <hr>
     
                     <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
     
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                    <p>{{$user->profile ? $user->profile->notes : ''}}</p>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -75,12 +76,111 @@
         <div class="col-md-9">
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#activity" data-toggle="tab">Activity</a></li>
+                    <li class="active"><a href="#personal_info" data-toggle="tab">Personal info</a></li>
+                    <li><a href="#account_info" data-toggle="tab">Account info</a></li>
+                    <li><a href="#activity" data-toggle="tab">Activity</a></li>
                     <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
-                    <li><a href="#personal_info" data-toggle="tab">Personal info</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="active tab-pane" id="activity">
+                    @include('layouts.errors')
+
+                    <div class="active tab-pane" id="personal_info">
+                        <form method="POST" class="form-horizontal" action="/profile/{{$user->id}}" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <label for="profilePicture" class="col-sm-2 control-label">Profile picture</label>
+                                <input type="file" name="profilePicture" id="profilePicture">
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Name" value="{{$user->name}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" placeholder="Email" value="{{$user->email}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="education" class="col-sm-2 control-label">Education</label>
+
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="education" id="education" placeholder="Education">{{$user->profile ? $user->profile->education : ''}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="education" class="col-sm-2 control-label">Position</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="position" class="form-control" id="position" placeholder="Position" value="{{$user->profile ? $user->profile->position : ''}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location" class="col-sm-2 control-label">Location</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="location" class="form-control" id="location" placeholder="Location" value="{{$user->profile ? $user->profile->location : ''}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location" class="col-sm-2 control-label">Skills</label>
+
+                                <div class="col-sm-10">
+                                    <input type="text" name="skills" class="form-control" id="skills" placeholder="Skills" value="{{$user->profile ? $user->profile->skills : ''}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="education" class="col-sm-2 control-label">Notes</label>
+
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" name="notes" id="notes" placeholder="Notes">{{$user->profile ? $user->profile->notes : ''}}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    <div class="tab-pane" id="account_info">
+                        <form method="POST" class="form-horizontal" action="/profile/{{$user->id}}" enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                </div>
+                            </div>
+                            {{--<div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-danger">Submit</button>
+                                </div>
+                            </div>--}}
+                        </form>
+                    </div>
+
+
+                    <div class="tab-pane" id="activity">
                         <!-- Post -->
                         <div class="post">
                             <div class="user-block">
@@ -291,65 +391,7 @@
                     </div>
                     <!-- /.tab-pane -->
 
-                    @include('layouts.errors')
 
-                    <div class="tab-pane" id="personal_info">
-                        <form method="POST" class="form-horizontal" action="/profile/{{$user->id}}" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            <div class="form-group">
-                                <label for="profilePicture" class="col-sm-2 control-label">Profile picture</label>
-                                <input type="file" name="profilePicture" id="profilePicture">
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name</label>
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-    
-                                <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-sm-2 control-label">Name</label>
-    
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName" placeholder="Name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
-    
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
-    
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-danger">Submit</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
                     <!-- /.tab-pane -->
                 </div>
                 <!-- /.tab-content -->

@@ -63,9 +63,9 @@
                     <!-- /.attachment-block -->
 
                     <!-- Social sharing buttons -->
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                    {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
                     <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                    <span class="pull-right text-muted">45 likes - 2 comments</span>
+                    <span class="pull-right text-muted">45 likes - 2 comments</span>--}}
                 </div>
                 <!-- /.box-body -->
                 {{--<div class="box-footer box-comments">--}}
@@ -102,14 +102,18 @@
                     {{--<!-- /.box-comment -->--}}
                 {{--</div>--}}
                 <!-- /.box-footer -->
-                <div class="box-footer">
+
+
+                {{--<div class="box-footer">
                     <form action="#" method="post">
                         <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user() ? Auth::user()->id : null}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
                         <div class="img-push">
                             <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
                         </div>
                     </form>
-                </div>
+                </div>--}}
+
+
             <!-- /.box-footer -->
             </div>
         @endforeach

@@ -58,7 +58,7 @@ Route::get('/facebook/test', function(SammyK\LaravelFacebookSdk\LaravelFacebookS
 //    }
 
     try {
-        $response = $fb->get('/1857730571156494?fields=access_token');
+        $response = $fb->get('/1857730571156494?fields=access_token', "");
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }

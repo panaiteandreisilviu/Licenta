@@ -39,9 +39,7 @@ class PostController extends Controller
 
     public function indexAdmin() {
 
-
         request()->user()->authorizeRoles(['admin']);
-
 
         $posts = \App\Post::all()->sortByDesc("created_at");
         return view('admin.posts.index', compact('posts'));

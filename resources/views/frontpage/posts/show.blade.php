@@ -19,7 +19,7 @@
             <div class="box box-widget {{--collapsed-box--}}">
                 <div class="box-header with-border">
                     <div class="user-block">
-                        <img class="img-circle" src="/storage/avatars/{{$post->user()->id}}" onerror="this.src='storage/avatars/default'" alt="User Image">
+                        <img class="img-circle" src="/storage/avatars/{{$post->user()->id}}" onerror="this.src='/storage/avatars/default'" alt="User Image">
                         <span class="username"><a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a> <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> - {{$post->title}}</span></span>
                         <span class="description">{{$post->created_at->diffForHumans()}}</span>
                     </div>
@@ -45,9 +45,9 @@
                     <!-- /.attachment-block -->
 
                     <!-- Social sharing buttons -->
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                    {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
                     <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                    <span class="pull-right text-muted">45 likes - 2 comments</span>
+                    <span class="pull-right text-muted">45 likes - 2 comments</span>--}}
                 </div>
                 <!-- /.box-body -->
                 {{--<div class="box-footer box-comments">--}}
@@ -87,14 +87,18 @@
                 <!-- /.box-footer -->
                 @if(Auth::check())
                 @endif
-                <div class="box-footer">
-                    <form action="#" method="post">
-                        <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user()->id}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
-                        <div class="img-push">
-                            <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                        </div>
-                    </form>
-                </div>
+
+
+                {{--<div class="box-footer">--}}
+                    {{--<form action="#" method="post">--}}
+                        {{--<img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user()->id}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">--}}
+                        {{--<div class="img-push">--}}
+                            {{--<input type="text" class="form-control input-sm" placeholder="Press enter to post comment">--}}
+                        {{--</div>--}}
+                    {{--</form>--}}
+                {{--</div>--}}
+
+
                 <!-- /.box-footer -->
             </div>
     </div>

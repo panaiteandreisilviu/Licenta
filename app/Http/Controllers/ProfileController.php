@@ -83,22 +83,35 @@ class ProfileController extends Controller
 //        $user->fill($input);
 
 
-        Storage::put(
-            'public/avatars/'.$user->id,
-            file_get_contents($request->file('profilePicture')->getRealPath())
-        );
+        if($request->file('profilePicture')){
+            Storage::put(
+                'public/avatars/'.$user->id,
+                file_get_contents($request->file('profilePicture')->getRealPath())
+            );
+        }
+
 
 
         $userProfile = $user->profile;
         if($userProfile){
 
             $userProfile->profile_picture_filename = 'avatar/' . $user->id;
+            $userProfile->education = request()->education;
+            $userProfile->position = request()->position;
+            $userProfile->location = request()->location;
+            $userProfile->skills = request()->skills;
+            $userProfile->notes = request()->notes;
             $user->profile()->save($userProfile);
 
         } else {
 
             $userProfile = new UserProfile([
                 'user_id' => $user->id,
+                'education' => request()->education,
+                'position' => request()->position,
+                'location' => request()->location,
+                'skills' => request()->skills,
+                'notes' => request()->notes,
                 'profile_picture_filename' => 'avatar/' . $user->id,
             ]);
             $user->profile()->save($userProfile);
