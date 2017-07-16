@@ -184,6 +184,8 @@ return [
 
         SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
 
+        Zizaco\Entrust\EntrustServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +238,7 @@ return [
         'Module' => Nwidart\Modules\Facades\Module::class,
         'Client' => Webklex\IMAP\Facades\Client::class,
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

@@ -26,7 +26,11 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
 
+            <li><a href="/admin"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+
             <li><a href="/admin/users"><i class="fa fa-user"></i> <span>Users</span></a></li>
+            <li><a href="/admin/roles"><i class="fa fa-male"></i> <span>Roles</span></a></li>
+            <li><a href="/admin/permissions"><i class="fa fa-male"></i> <span>Permissions</span></a></li>
 
             <li><a href="/admin/posts/create"><i class="fa fa-plus"></i> <span>Create a post</span></a></li>
             <li><a href="/admin/posts"><i class="fa fa-book"></i> <span>View all posts</span></a></li>

@@ -12,7 +12,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "nwidart/laravel-modules": "^1.25",
-        "webklex/laravel-imap": "1.0.2.8"
+        "webklex/laravel-imap": "1.0.2.8",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

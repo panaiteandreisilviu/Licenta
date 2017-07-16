@@ -15,20 +15,22 @@
     {{--</div>--}}
 
     @foreach($posts as $post)
-        <div class="box box-default">
-            <div class="box-header with-border">
-                <h3 class="box-title">{{$post->title}}</h3>
-            </div>
-            <div class="box-body">
-                {!!$post->body !!}
-            </div>
+        <div class="col-xs-12">
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{$post->title}}</h3>
+                </div>
+                <div class="box-body">
+                    {!!$post->body !!}
+                </div>
 
-            <div class="box-footer small-box-footer">
+                <div class="box-footer small-box-footer">
                 <span class="pull-right">
                     {{$post->user()->name}} | {{$post->created_at}}
                 </span>
+                </div>
+                <!-- /.box-body -->
             </div>
-            <!-- /.box-body -->
         </div>
     @endforeach
     <!-- /.box -->

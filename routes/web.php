@@ -13,23 +13,41 @@
 
 // ----------------- FRONT PAGE -----------------------
 
+// ------ POSTS
 Route::get('/', "PostController@index")->name("frontpage");
 Route::get('/posts', "PostController@index");
 Route::get('/post/{post}', "PostController@show");
 
+// ------ PROFILE
+
 //Route::get('/profile', "ProfileController@index");
 Route::get('/profile/{user}', "ProfileController@show");
 Route::post('/profile/{user}', "ProfileController@update");
+
+
 // ----------------- ADMIN -----------------------
 
 Route::get('/admin', "AdminController@index")->name("adminpage");
 
-Route::get('/admin/posts', "PostController@indexAdmin");
+// ------ POSTS
 
+Route::get('/admin/posts', "PostController@indexAdmin");
 Route::get('/admin/posts/create', "PostController@create");
 Route::post('/admin/posts/store', "PostController@store");
 
+// ------ USERS
+
 Route::get('/admin/users', "UsersController@index");
+
+// ------ ROLES
+
+Route::resource('/admin/roles', "RolesController");
+
+// ------ PERMISSIONS
+
+Route::resource('/admin/permissions', "PermissionsController");
+
+// ------ MAIL
 
 Route::get('/admin/mail', "MailController@index");
 
@@ -45,31 +63,7 @@ Route::post('/login', 'SessionsController@store');
 Route::get('/logout', 'SessionsController@destroy');
 
 
-
-// Endpoint that is redirected to after an authentication attempt
-Route::get('/facebook/test', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
-{
-    $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-
-//    try {
-//        $response = $fb->get('/709511829232448/posts');
-//    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-//        dd($e->getMessage());
-//    }
-
-    try {
-        $response = $fb->get('/1857730571156494?fields=access_token', "");
-    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-        dd($e->getMessage());
-    }
-
-
-    dd($response);
-
-});
-
-
-
+// ----------------- FACEBOOK LOGIN -----------------------
 
 Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
@@ -139,4 +133,28 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     Auth::login($user);
 
     return redirect('/')->with('message', 'Successfully logged in with Facebook');
+});
+
+// ----------------- TEST -----------------------
+
+// Endpoint that is redirected to after an authentication attempt
+Route::get('/facebook/test', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+{
+    $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+//    try {
+//        $response = $fb->get('/709511829232448/posts');
+//    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+//        dd($e->getMessage());
+//    }
+
+    try {
+        $response = $fb->get('/1857730571156494?fields=access_token', "");
+    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+
+    dd($response);
+
 });

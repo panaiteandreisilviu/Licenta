@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UsersController extends Controller
+use App\Role;
+
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,8 +15,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = \App\User::all()->sortByDesc("created_at");
-        return view('admin.users.index', compact('users'));
+        $roles = Role::all()->sortByDesc("created_at");
+        return view('admin.roles.index', compact('roles'));
     }
 
     /**
@@ -24,7 +26,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.roles.create');
     }
 
     /**
@@ -35,7 +37,21 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(request(),[
+            'name' => 'required',
+            'display_name' => 'required',
+        ]);
+
+        // Create and save the user;
+        $role = Role::create([
+            'name' => request('name'),
+            'display_name' => request('display_name'),
+            'description' => request('description'),
+        ]);
+
+        $request->session()->flash('success_message', 'Role successfully saved!');
+
+        return redirect('admin/roles');
     }
 
     /**
@@ -52,24 +68,36 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Role $role
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Role $role)
     {
-        //
+        return view('admin.roles.edit')->with(compact('role'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Role $role
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $this->validate(request(),[
+            'name' => 'required',
+            'display_name' => 'required',
+        ]);
+
+        $input = $request->all();
+
+        $role->fill($input)->save();
+
+        $request->session()->flash('success_message', 'Role successfully saved!');
+
+        return back();
+
     }
 
     /**

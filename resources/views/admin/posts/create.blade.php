@@ -1,7 +1,7 @@
 @extends('layouts.admin.default')
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
+
+    <div class="col-md-12">
 
             <div class="box box-info">
                 <div class="box-header">
@@ -72,9 +72,6 @@
                 {{--</div>--}}
             {{--</div>--}}
         </div>
-        <!-- /.col-->
-    </div>
-
 
     <script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
     <script src="{{ URL::asset('AdminLTE-2.3.11/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') }}"></script>

@@ -35,6 +35,13 @@
             <div class="pull-left">
                 <a href="/profile/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
             </div>
+
+            @role('admin')
+            <div class="pull-left" style="margin-left:2px;">
+                <a href="/admin" class="btn btn-default btn-flat">Admin console</a>
+            </div>
+            @endrole
+
             <div class="pull-right">
                 <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
             </div>

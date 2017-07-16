@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 use App\Role;
-
 class RoleTableSeeder extends Seeder
 {
     /**
@@ -13,14 +11,22 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
-        $role_employee = new Role();
-        $role_employee->name = 'user';
-        $role_employee->description = 'A basic user';
-        $role_employee->save();
+        $owner = new Role();
+        $owner->name         = 'owner';
+        $owner->display_name = 'Project Owner'; // optional
+        $owner->description  = 'User is the owner of a given project'; // optional
+        $owner->save();
 
-        $role_manager = new Role();
-        $role_manager->name = 'admin';
-        $role_manager->description = 'Administrator user';
-        $role_manager->save();
+        $admin = new Role();
+        $admin->name         = 'admin';
+        $admin->display_name = 'Administrator'; // optional
+        $admin->description  = 'User is allowed to manage and edit other users'; // optional
+        $admin->save();
+
+        $admin = new Role();
+        $admin->name         = 'teacher';
+        $admin->display_name = 'Teacher'; // optional
+        $admin->description  = 'User is allowed to add and edit posts'; // optional
+        $admin->save();
     }
 }
