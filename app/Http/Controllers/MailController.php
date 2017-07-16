@@ -22,7 +22,7 @@ class MailController extends Controller
             'encryption'    => 'ssl', /*getenv('IMAP_ENCRYPTION'),*/
             'validate_cert' => 'true', /*getenv('IMAP_VALIDATE_CERT'),*/
             'username'      => 'panaiteandreisilviu', /*getenv('IMAP_USERNAME'),*/
-            'password'      => '#Carnivalsupergt1', /*getenv('IMAP_PASSWORD'),*/
+            'password'      => '', /*getenv('IMAP_PASSWORD'),*/
         ]);
 
         //Connect to the IMAP Server
