@@ -66,7 +66,5 @@
         });
     </script>
 
-    <flash></flash>
-
     <!-- /.box -->
 @endsection

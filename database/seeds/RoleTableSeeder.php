@@ -11,6 +11,12 @@ class RoleTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = new Role();
+        $user->name         = 'user';
+        $user->display_name = 'Basic user'; // optional
+        $user->description  = 'Basic user with limited view rights'; // optional
+        $user->save();
+
         $owner = new Role();
         $owner->name         = 'owner';
         $owner->display_name = 'Project Owner'; // optional

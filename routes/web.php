@@ -38,6 +38,8 @@ Route::post('/admin/posts/store', "PostController@store");
 // ------ USERS
 
 Route::get('/admin/users', "UsersController@index");
+Route::get('/admin/users/{user}/edit', "UsersController@edit");
+Route::put('/admin/users/{user}', "UsersController@update");
 
 // ------ ROLES
 
@@ -46,6 +48,11 @@ Route::resource('/admin/roles', "RolesController");
 // ------ PERMISSIONS
 
 Route::resource('/admin/permissions', "PermissionsController");
+
+// ------ ROLE -> PERMISSIONS
+
+Route::get('admin/role_permission/{role}', "RolePermission@index");
+Route::post('admin/role_permission', "RolePermission@edit");
 
 // ------ MAIL
 

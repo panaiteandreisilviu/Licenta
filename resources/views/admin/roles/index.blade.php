@@ -20,7 +20,7 @@
                             <th>Name</th>
                             <th>Display name</th>
                             <th>Description</th>
-                            <th style="max-width:50px">Actions</th>
+                            <th style="max-width:110px">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -33,6 +33,10 @@
                                 <td>
                                     <a href="/admin/roles/{{$role->id}}/edit" class="btn btn-primary btn-xs">
                                         <i class="fa fa-edit"></i> Edit
+                                    </a>
+
+                                    <a href="/admin/role_permission/{{$role->id}}" class="btn btn-info btn-xs">
+                                        <i class="fa fa-pencil"></i> Permissions
                                     </a>
                                 </td>
                             </tr>
@@ -65,8 +69,6 @@
 //            "autoWidth": false
         });
     </script>
-
-    <flash></flash>
 
     <!-- /.box -->
 @endsection

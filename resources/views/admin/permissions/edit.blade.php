@@ -5,7 +5,7 @@
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit Permission - <b>{{$permission->display_name}}</b></h3>
+                    <h3 class="box-title">Edit Permission - <span class="label label-default">{{$permission->display_name}}</span></h3>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->

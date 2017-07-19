@@ -1,0 +1,16 @@
+{
+    "name": "Frontpage",
+    "alias": "frontpage",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Frontpage\\Providers\\FrontpageServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

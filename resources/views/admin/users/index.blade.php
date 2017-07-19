@@ -29,9 +29,9 @@
                         <th>Full Name</th>
                         <th>Email</th>
                         <th>Created at</th>
-                        <th>Active</th>
+                        <th style="max-width: 50px;">Active</th>
                         <th>Role</th>
-                        <th>Actions</th>
+                        <th style="max-width: 50px;">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -48,9 +48,17 @@
                                     <span class="label label-danger"> <i class="fa fa-times"></i> No &nbsp;</span>
                                 @endif
                             </td>
-                            <td>-role-</td>
                             <td>
-                                <a href="/admin/users/" class="btn btn-primary btn-xs">
+                                @if($user->roles()->first())
+                                    <span class="label label-default">
+                                        <i class="fa fa-male"></i> {{$user->roles()->first() ? $user->roles()->first()->display_name : ''}}
+                                    </span>
+                                @else
+                                    -
+                                @endif
+                                </td>
+                            <td>
+                                <a href="/admin/users/{{$user->id}}/edit" class="btn btn-primary btn-xs">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
                             </td>
@@ -70,21 +78,20 @@
 
     </div>
 
-    <script src="{{ URL::asset('AdminLTE-2.3.11/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ URL::asset('AdminLTE-2.3.11/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
-
     <script>
-        $('#usersTable').DataTable({
+        $(function(){
+
+            $('#usersTable').DataTable({
 //            "paging": true,
 //            "lengthChange": false,
 //            "searching": false,
 //            "ordering": true,
 //            "info": true,
 //            "autoWidth": false
-        });
-    </script>
+            });
 
-    <flash></flash>
+        })
+    </script>
 
     <!-- /.box -->
 @endsection

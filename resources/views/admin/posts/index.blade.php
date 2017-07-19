@@ -1,37 +1,69 @@
 @extends('layouts.admin.default')
 @section('content')
-    {{--<div class="callout callout-info">--}}
-    {{--<h4>Tip!</h4>--}}
 
-    {{--<p>Add the layout-top-nav class to the body tag to get this layout. This feature can also be used with a--}}
-    {{--sidebar! So use this class if you want to remove the custom dropdown menus from the navbar and use regular--}}
-    {{--links instead.</p>--}}
-    {{--</div>--}}
-    {{--<div class="callout callout-danger">--}}
-    {{--<h4>Warning!</h4>--}}
-
-    {{--<p>The construction of this layout differs from the normal one. In other words, the HTML markup of the navbar--}}
-    {{--and the content will slightly differ than that of the normal layout.</p>--}}
-    {{--</div>--}}
-
-    @foreach($posts as $post)
+    <div class="row">
         <div class="col-xs-12">
-            <div class="box box-default">
-                <div class="box-header with-border">
-                    <h3 class="box-title">{{$post->title}}</h3>
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Posts</h3>
+                    <a href="/admin/posts/create" class="btn bg-gray btn-xs pull-right">
+                        <i class="fa fa-plus"></i> Add
+                    </a>
                 </div>
+                <!-- /.box-header -->
                 <div class="box-body">
-                    {!!$post->body !!}
-                </div>
+                    <table id="postsTable" class="table table-bordered table-hover">
 
-                <div class="box-footer small-box-footer">
-                <span class="pull-right">
-                    {{$post->user()->name}} | {{$post->created_at}}
-                </span>
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Title</th>
+                            <th>Body</th>
+                            <th>Created by</th>
+                            <th>Created at</th>
+                            <th style="max-width:110px">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($posts as $post)
+                            <tr>
+                                <td>{{$post->id}}</td>
+                                <td>{{$post->title}}</td>
+                                <td>{{$post->body}}</td>
+                                <td>{{$post->user()->name}}</td>
+                                <td>{{$post->created_at}}</td>
+                                <td>
+                                    <a href="/admin/post/{{$post->id}}/edit" class="btn btn-primary btn-xs">
+                                        <i class="fa fa-edit"></i> Edit
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                        <tfoot>
+                        <tr>
+
+                        </tr>
+                        </tfoot>
+                    </table>
                 </div>
                 <!-- /.box-body -->
             </div>
+            <!-- /.box -->
+
         </div>
-    @endforeach
+    </div>
+
+    <script>
+        $('#postsTable').DataTable({
+//            "paging": true,
+//            "lengthChange": false,
+//            "searching": false,
+//            "ordering": true,
+//            "info": true,
+//            "autoWidth": false
+        });
+    </script>
+
     <!-- /.box -->
 @endsection
