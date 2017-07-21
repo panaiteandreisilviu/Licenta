@@ -18,6 +18,10 @@ class CreatePostsTable extends Migration
             $table->integer('user_id');
             $table->string('title');
             $table->text('body');
+            $table->integer('published')->default(0);
+            $table->integer('published_twitter')->default(0);
+            $table->integer('published_facebook')->default(0);
+            $table->timestamp('published_at')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();
         });

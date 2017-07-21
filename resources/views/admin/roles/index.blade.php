@@ -1,4 +1,4 @@
-@extends('layouts.admin.default')
+@extends('layouts.admin.default', ['title' => 'Roles', 'subtitle' => ''])
 @section('content')
 
     <div class="row">

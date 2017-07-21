@@ -14,9 +14,18 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layouts.top-nav.sidebar', function($view){
-            $posts = \App\Post::latest();
+
+            // Post Count
+            $posts = \App\Post::latest()->where('published', '=' , '1');
             $postCount = $posts->count();
-            $view->with(['archives' => \App\Post::archives(), 'postCount' => $postCount]);
+
+            // Archives
+            $archives = \App\Post::archives();
+
+            // User archives
+            $userArchives = \App\Post::archivesByUser();
+
+            $view->with(['archives' => $archives, 'userArchives' => $userArchives, 'postCount' => $postCount]);
         });
     }
 

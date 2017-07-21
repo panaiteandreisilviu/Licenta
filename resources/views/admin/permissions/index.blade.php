@@ -1,4 +1,4 @@
-@extends('layouts.admin.default')
+@extends('layouts.admin.default', ['title' => 'Permissions', 'subtitle' => ''])
 @section('content')
 
     <div class="row">

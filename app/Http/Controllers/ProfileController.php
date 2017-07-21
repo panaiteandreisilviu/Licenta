@@ -7,6 +7,8 @@ use App\UserProfile;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 class ProfileController extends Controller
 {
     /**

@@ -15,6 +15,7 @@ require('./bootstrap');
 
 Vue.component('flash', require('./components/flash.vue'));
 Vue.component('role_permission_toggle', require('./components/role_permission_toggle.vue'));
+Vue.component('post_publisher', require('./components/post_publisher.vue'));
 
 window.addEventListener('load', function () {
 

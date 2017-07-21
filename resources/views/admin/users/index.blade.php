@@ -1,4 +1,4 @@
-@extends('layouts.admin.default')
+@extends('layouts.admin.default', ['title' => 'Users', 'subtitle' => ''])
 @section('content')
     {{--<div class="callout callout-info">--}}
     {{--<h4>Tip!</h4>--}}

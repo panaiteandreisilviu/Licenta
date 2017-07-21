@@ -1,55 +1,47 @@
-@extends('layouts.admin.default', ['title' => 'Create post', 'subtitle' => ''])
+@extends('layouts.admin.default', ['title' => 'Edit post', 'subtitle' => ''])
 @section('content')
-
     <div class="row">
         <div class="col-xs-12 col-md-8 col-md-offset-2">
 
             <div class="box box-info">
                 <div class="box-header">
-                    <h3 class="box-title">Add a new post
+                    <h3 class="box-title">Edit Post <b>{{$post->id}}</b>
                         <small></small>
                     </h3>
-                    <!-- tools box -->
-                    <div class="pull-right box-tools">
-                        {{--<button type="button" class="btn btn-info btn-sm" data-widget="collapse" data-toggle="tooltip" title="Collapse">--}}
-                        {{--<i class="fa fa-minus"></i></button>--}}
-                        {{--<button type="button" class="btn btn-info btn-sm" data-widget="remove" data-toggle="tooltip" title="Remove">--}}
-                        {{--<i class="fa fa-times"></i></button>--}}
-                    </div>
-                    <!-- /. tools -->
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body pad">
 
                     @include('layouts.errors')
 
-                    <form method="POST" action="/admin/posts/store" enctype="multipart/form-data">
+                    <form method="POST" action="/admin/posts/{{$post->id}}" enctype="multipart/form-data">
 
                         {{csrf_field()}}
+                        {{ method_field('PUT') }}
+
                         <div class="form-group">
                             <label for="post_title">Post title</label>
-                            <input type="text" class="form-control" name=title id="post_title" placeholder="Post title">
+                            <input type="text" class="form-control" name=title id="post_title" placeholder="Post title" value="{{$post->title}}">
                         </div>
 
                         <div class="form-group">
                             <label for="author">Author</label>
                             <select class="form-control" name="author" id="author">
-                                {{--<option value="" disabled selected>Author</option>--}}
                                 @foreach(\App\User::all() as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                    <option {{$user->id == $post->user_id ? 'selected' : ''}} value="{{$user->id}}">{{$user->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="post_image" class="control-label">Post cover</label>
-                            <img src="" onerror="" class="img-responsive pad" id="image_preview"
+                            <img src="/storage/post_images/{{$post->image_path}}" onerror="" class="img-responsive pad" id="image_preview"
                                  style="max-width: 289px; padding:0; margin-bottom:5px;" alt="">
 
                             <div class="input-group">
                               <span class="input-group-btn">
-                                <label class="btn btn-primary btn-file">
-                                    Browse <input type="file" name="image" id="post_image" onchange="loadFile(event)">
+                                <label class="btn btn-default btn-file">
+                                    Browse <input type="file" name="image" id="post_image" style="display: none;" onchange="loadFile(event)">
                                 </label>
                               </span>
                                 <input type="text" class="form-control" placeholder="Select an image ..." style="max-width:220px; background: white;" id="image_path_preview" readonly>
@@ -59,14 +51,15 @@
                         <div class="form-group">
                             <label for="post_title">Publish post</label>
                             <div class="clearfix"></div>
-                            <post_publisher></post_publisher>
+                            <post_publisher published="{{(bool)$post->published}}" published_twitter="{{(bool)$post->published_twitter}}" published_facebook="{{(bool)$post->published_facebook}}"></post_publisher>
                         </div>
 
                         <div class="form-group">
                             <label for="post_editor">Post body</label>
-                            <textarea id="post_editor" name="body" rows="6" cols="80"></textarea>
+                            <textarea class="form-control" id="post_editor" name="body" rows="6" cols="80">{{$post->body}}</textarea>
                         </div>
 
+                        <br>
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa fa-mail-forward"></i> Submit
@@ -114,7 +107,6 @@
         $(function () {
             CKEDITOR.replace('post_editor');
 //            $(".textarea").wysihtml5();
-
         });
 
         function loadFile(event){
@@ -123,6 +115,16 @@
             output.src = URL.createObjectURL(event.target.files[0]);
             output_path.value = event.target.files[0].name;
         }
+
+/*        $(function(){
+            PNotify.prototype.options.styling = "fontawesome";
+
+            new PNotify({
+                title: 'Regular Notice',
+                text: 'Check me out! I\'m a notice.'
+            });
+        });*/
+
     </script>
 
 

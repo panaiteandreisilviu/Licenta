@@ -78,8 +78,8 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#personal_info" data-toggle="tab">Personal info</a></li>
                     <li><a href="#account_info" data-toggle="tab">Account info</a></li>
-                    <li><a href="#activity" data-toggle="tab">Activity</a></li>
-                    <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+                    {{--<li><a href="#activity" data-toggle="tab">Activity</a></li>
+                    <li><a href="#timeline" data-toggle="tab">Timeline</a></li>--}}
                 </ul>
                 <div class="tab-content">
                     @include('layouts.errors')

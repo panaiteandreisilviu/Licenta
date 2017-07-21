@@ -1,10 +1,21 @@
 <section class="content-header">
     <h1>
-        Title
-        <small>subtitle (WIP)</small>
+        {{$title ? $title : 'No page title set'}}
+        <small>{{$subtitle ? $subtitle : '' }}</small>
     </h1>
-    <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-    </ol>
+
+    @if(count($breadcrumbs))
+        <ol class="breadcrumb">
+            <i class="fa fa-dashboard"></i>&nbsp;
+            @foreach($breadcrumbs as $breadcrumb_title => $breadcrumb_url)
+                @if($breadcrumb_url)
+                    <li><a href="{{$breadcrumb_url}}">{{$breadcrumb_title}}</a></li>
+                @else
+                    <li>{{$breadcrumb_title}}</li>
+                @endif
+            @endforeach
+        </ol>
+
+    @endif
+
 </section>

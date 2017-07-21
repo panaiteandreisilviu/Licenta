@@ -1,4 +1,5 @@
-@extends('layouts.top-nav.default')
+@extends('layouts.top-nav.default', ['title' => ' ', 'subtitle' => ''])
+
 @section('content')
     {{--<div class="callout callout-info">--}}
         {{--<h4>Tip!</h4>--}}
@@ -17,13 +18,16 @@
 
     <div class="col-sm-8 col-xs-12">
         @foreach($posts as $post)
-            <div class="box box-widget {{--collapsed-box--}}">
-                <div class="box-header with-border">
-                    <div class="user-block">
 
-                        <img class="img-circle" src="storage/avatars/{{$post->user()->id}}" onerror="this.src='storage/avatars/default'" alt="User Image">
+            @if($post->published)
 
-                        <span class="username">
+                <div class="box box-widget {{--collapsed-box--}}">
+                    <div class="box-header with-border">
+                        <div class="user-block">
+
+                            <img class="img-circle" src="storage/avatars/{{$post->user()->id}}" onerror="this.src='storage/avatars/default'" alt="User Image">
+
+                            <span class="username">
                             <a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a>
 
                             <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> -
@@ -34,72 +38,72 @@
 
                         </span>
 
-                        <span class="description">{{$post->created_at->diffForHumans()}}</span>
+                            <span class="description">{{$post->published_at ? $post->published_at->diffForHumans() : ''}}</span>
 
-                    </div>
-                    <!-- /.user-block -->
-                    <div class="box-tools">
-                        {{--<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">--}}
+                        </div>
+                        <!-- /.user-block -->
+                        <div class="box-tools">
+                            {{--<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">--}}
                             {{--<i class="fa fa-circle-o"></i></button>--}}
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                        </button>
-                        {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
+                        </div>
+                        <!-- /.box-tools -->
                     </div>
-                    <!-- /.box-tools -->
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body">
-                    <!-- post text -->
-                    <h4 class="hidden-md hidden-lg">
-                        <a href="/post/{{$post->id}}">
-                            {{$post->title}}
-                        </a>
-                    </h4>
-                    {!!$post->body !!}
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <!-- post text -->
+                        <h4 class="hidden-md hidden-lg">
+                            <a href="/post/{{$post->id}}">
+                                {{$post->title}}
+                            </a>
+                        </h4>
+                        {!!$post->body !!}
 
-                    <img src="/storage/post_images/{{$post->image_path}}" onerror="" class="img-responsive pad" alt="">
+                        <img src="/storage/post_images/{{$post->image_path}}" onerror="" class="img-responsive pad" alt="">
 
-                    <!-- Attachment -->
-                    <!-- /.attachment-block -->
+                        <!-- Attachment -->
+                        <!-- /.attachment-block -->
 
-                    <!-- Social sharing buttons -->
-                    {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
-                    <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                    <span class="pull-right text-muted">45 likes - 2 comments</span>--}}
-                </div>
-                <!-- /.box-body -->
+                        <!-- Social sharing buttons -->
+                        {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
+                        <span class="pull-right text-muted">45 likes - 2 comments</span>--}}
+                    </div>
+                    <!-- /.box-body -->
                 {{--<div class="box-footer box-comments">--}}
-                    {{--<div class="box-comment">--}}
-                        {{--<!-- User image -->--}}
-                        {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user3-128x128.jpg" alt="User Image">--}}
+                {{--<div class="box-comment">--}}
+                {{--<!-- User image -->--}}
+                {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user3-128x128.jpg" alt="User Image">--}}
 
-                        {{--<div class="comment-text">--}}
-                      {{--<span class="username">--}}
-                        {{--Maria Gonzales--}}
-                        {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
-                      {{--</span><!-- /.username -->--}}
-                            {{--It is a long established fact that a reader will be distracted--}}
-                            {{--by the readable content of a page when looking at its layout.--}}
-                        {{--</div>--}}
-                        {{--<!-- /.comment-text -->--}}
-                    {{--</div>--}}
-                    {{--<!-- /.box-comment -->--}}
-                    {{--<div class="box-comment">--}}
-                        {{--<!-- User image -->--}}
-                        {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user5-128x128.jpg" alt="User Image">--}}
+                {{--<div class="comment-text">--}}
+                {{--<span class="username">--}}
+                {{--Maria Gonzales--}}
+                {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
+                {{--</span><!-- /.username -->--}}
+                {{--It is a long established fact that a reader will be distracted--}}
+                {{--by the readable content of a page when looking at its layout.--}}
+                {{--</div>--}}
+                {{--<!-- /.comment-text -->--}}
+                {{--</div>--}}
+                {{--<!-- /.box-comment -->--}}
+                {{--<div class="box-comment">--}}
+                {{--<!-- User image -->--}}
+                {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user5-128x128.jpg" alt="User Image">--}}
 
-                        {{--<div class="comment-text">--}}
-                      {{--<span class="username">--}}
-                        {{--Nora Havisham--}}
-                        {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
-                      {{--</span><!-- /.username -->--}}
-                            {{--The point of using Lorem Ipsum is that it has a more-or-less--}}
-                            {{--normal distribution of letters, as opposed to using--}}
-                            {{--'Content here, content here', making it look like readable English.--}}
-                        {{--</div>--}}
-                        {{--<!-- /.comment-text -->--}}
-                    {{--</div>--}}
-                    {{--<!-- /.box-comment -->--}}
+                {{--<div class="comment-text">--}}
+                {{--<span class="username">--}}
+                {{--Nora Havisham--}}
+                {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
+                {{--</span><!-- /.username -->--}}
+                {{--The point of using Lorem Ipsum is that it has a more-or-less--}}
+                {{--normal distribution of letters, as opposed to using--}}
+                {{--'Content here, content here', making it look like readable English.--}}
+                {{--</div>--}}
+                {{--<!-- /.comment-text -->--}}
+                {{--</div>--}}
+                {{--<!-- /.box-comment -->--}}
                 {{--</div>--}}
                 <!-- /.box-footer -->
 
@@ -114,8 +118,11 @@
                 </div>--}}
 
 
-            <!-- /.box-footer -->
-            </div>
+                <!-- /.box-footer -->
+                </div>
+
+            @endif
+
         @endforeach
     </div>
 

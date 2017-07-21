@@ -35,7 +35,7 @@
     <div class="content-wrapper">
         <div class="container">
             <!-- Content Header (Page header) -->
-            @include('layouts.top-nav.title-breadcrumb')
+        @include('layouts.admin.title-breadcrumb', ['title' => isset($title) ? $title : null, 'subtitle' => isset($subtitle) ? $subtitle : null, 'breadcrumbs' => \App\Breadcrumbs::get(Request::path())])
             <!-- Main content -->
             <section class="content">
                 @yield('content')

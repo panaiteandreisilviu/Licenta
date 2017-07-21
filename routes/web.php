@@ -34,6 +34,8 @@ Route::get('/admin', "AdminController@index")->name("adminpage");
 Route::get('/admin/posts', "PostController@indexAdmin");
 Route::get('/admin/posts/create', "PostController@create");
 Route::post('/admin/posts/store', "PostController@store");
+Route::get('/admin/posts/{post}/edit', "PostController@edit");
+Route::put('/admin/posts/{post}', "PostController@update");
 
 // ------ USERS
 

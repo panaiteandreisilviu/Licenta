@@ -33,6 +33,8 @@
 
 {{-- ------------------  BODY ------------------ --}}
 
+@include('layouts.admin.scripts')
+
 
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper" id="app">
@@ -42,13 +44,13 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-        @include('layouts.admin.title-breadcrumb')
+        @include('layouts.admin.title-breadcrumb', ['title' => isset($title) ? $title : null, 'subtitle' => isset($subtitle) ? $subtitle : null, 'breadcrumbs' => \App\Breadcrumbs::get(Request::path())])
 
         <!-- Main content -->
         <section class="content">
 
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-8 col-xs-offset-2">
                     @if(Session::has('success_message'))
                         <div class="alert alert-success">
                             {{ Session::get('success_message') }}
@@ -71,8 +73,6 @@
 
 </div>
 <!-- ./wrapper -->
-
-@include('layouts.admin.scripts')
 
 </body>
 

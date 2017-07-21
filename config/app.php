@@ -186,6 +186,10 @@ return [
 
         Zizaco\Entrust\EntrustServiceProvider::class,
 
+        Intervention\Image\ImageServiceProvider::class
+
+
+
     ],
 
     /*
@@ -239,6 +243,7 @@ return [
         'Client' => Webklex\IMAP\Facades\Client::class,
         'Facebook' => SammyK\LaravelFacebookSdk\FacebookFacade::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'Image' => Intervention\Image\Facades\Image::class
 
     ],
 

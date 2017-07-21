@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notifications\PostPublished;
 use Illuminate\Support\Facades\Storage;
@@ -30,6 +31,10 @@ class PostController extends Controller
         }
         if($year = request('year')){
             $posts->whereYear('created_at', $year);
+        }
+
+        if($user_id = request('user')){
+            $posts->where('user_id', '=' , $user_id);
         }
 
         $posts = $posts->get();
@@ -60,12 +65,15 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         // REDIRECTS TO SAME PAGE IF VALIDATION FAILS !!
         $this->validate(request(), [
             'title' => 'required',
             'body' => 'required',
-            'image' => 'image|mimes:jpeg,png'
+            'author' => 'required',
+            'image' => 'image|mimes:jpeg,png,bmp'
         ]);
+
 
         $imageHashName = "";
         if(request('image')) {
@@ -75,15 +83,36 @@ class PostController extends Controller
                 file_get_contents(request()->file('image')->getRealPath())
             );
         }
+
+        if(request('published_twitter')){
+            //$post->notify(new PostPublished($post));
+        }
+
+        if(request('published_facebook') ){
+            //$post->notify(new PostPublished($post));
+        }
+
+        if(request('published')){
+            $published_at = new Carbon();
+            $published_at = $published_at->format('Y-m-d H:i:s');
+        } else{
+            $published_at = null;
+        }
+
         Post::create([
             'title' => request('title'),
             'body' => request('body'),
-            'user_id' => auth()->id(),
+            'user_id' => request('author') ? request('author') : auth()->id(),
+            'published_at' => $published_at,
+            'published' => request('published') ? 1 : 0,
+            'published_twitter' => request('published_twitter') ? 1 : 0,
+            'published_facebook' => request('published_facebook') ? 1 : 0,
             'image_path' => $imageHashName,
         ]);
 
         $post = Post::orderBy('created_at', 'desc')->first();
-        $post->notify(new PostPublished());
+
+        $request->session()->flash('success_message', 'Post successfully saved!');
 
         return back();
     }
@@ -107,7 +136,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -119,7 +148,56 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+
+        $this->validate(request(), [
+            'title' => 'required',
+            'body' => 'required',
+            'author' => 'required',
+            'image' => 'image|mimes:jpeg,png,bmp'
+        ]);
+
+        // Delete last image (if exists)
+        if($post->image_path){
+            Storage::delete('public/post_images/' . $post->image_path);
+        }
+
+        //Upload new image
+        $imageHashName = "";
+        if(request('image')) {
+            $imageHashName = request()->file('image')->hashName();
+            Storage::put(
+                'public/post_images/' . $imageHashName,
+                file_get_contents(request()->file('image')->getRealPath())
+            );
+        }
+
+
+        if(!$post->published && request('published')){
+            $published_at = new Carbon();
+            $published_at = $published_at->format('Y-m-d H:i:s');
+        } else{
+            $published_at = $post->published_at;
+        }
+
+        $post->title = request('title');
+        $post->body = request('body');
+        $post->user_id = request('author') ? request('author') : $post->user_id;
+        $post->published = request('published') ? 1 : 0;
+        $post->published_at = $published_at;
+        $post->published_twitter = request('published_twitter') ? 1 : 0;
+        $post->published_facebook = request('published_facebook') ? 1 : 0;
+        $post->image_path = $imageHashName;
+
+        // Publish post
+//        if(request('published') == 1 && !request('published') ){
+//            $post->notify(new PostPublished());
+//        }
+
+        $post->save();
+
+        $request->session()->flash('success_message', 'Post successfully saved!');
+
+        return back();
     }
 
     /**

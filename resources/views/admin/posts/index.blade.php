@@ -1,4 +1,4 @@
-@extends('layouts.admin.default')
+@extends('layouts.admin.default', ['title' => 'Posts', 'subtitle' => ''])
 @section('content')
 
     <div class="row">
@@ -6,7 +6,7 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Posts</h3>
-                    <a href="/admin/posts/create" class="btn bg-gray btn-xs pull-right">
+                    <a href="/admin/posts/create" class="btn btn-info btn-xs pull-right">
                         <i class="fa fa-plus"></i> Add
                     </a>
                 </div>
@@ -18,8 +18,9 @@
                         <tr>
                             <th>Id</th>
                             <th>Title</th>
-                            <th>Body</th>
-                            <th>Created by</th>
+                            <th>Published</th>
+                            <th>Published at</th>
+                            <th>Author</th>
                             <th>Created at</th>
                             <th style="max-width:110px">Actions</th>
                         </tr>
@@ -29,11 +30,22 @@
                             <tr>
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->title}}</td>
-                                <td>{{$post->body}}</td>
+                                <td>
+                                    @if($post->published == 1)
+                                        <span class="label label-success">
+                                            <i class="fa fa-check"></i> Yes
+                                        </span>
+                                    @else
+                                        <span class="label label-default">
+                                            <i class="fa fa-times"></i> No
+                                        </span>
+                                    @endif
+                                </td>
+                                <td>{{$post->published_at ? $post->published_at : ' - '}}</td>
                                 <td>{{$post->user()->name}}</td>
                                 <td>{{$post->created_at}}</td>
                                 <td>
-                                    <a href="/admin/post/{{$post->id}}/edit" class="btn btn-primary btn-xs">
+                                    <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-primary btn-xs">
                                         <i class="fa fa-edit"></i> Edit
                                     </a>
                                 </td>
@@ -53,6 +65,7 @@
 
         </div>
     </div>
+
 
     <script>
         $('#postsTable').DataTable({

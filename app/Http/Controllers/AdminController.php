@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Permission;
+use App\Post;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -19,7 +23,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.main.index', compact('posts'));
+        $userCount = User::all()->count();
+        $postCount = Post::all()->where('published', '=', '1')->count();
+        $roleCount = Role::all()->count();
+        $permissionCount = Permission::all()->count();
+
+        return view('admin.main.index', compact('userCount', 'postCount', 'roleCount', 'permissionCount'));
     }
 
     /**
