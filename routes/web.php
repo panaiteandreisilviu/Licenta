@@ -24,6 +24,15 @@ Route::get('/post/{post}', "PostController@show");
 Route::get('/profile/{user}', "ProfileController@show");
 Route::post('/profile/{user}', "ProfileController@update");
 
+// ------ PAGES
+
+Route::get('/pages/{page}', "PageController@index");
+Route::get('admin/pages', "PageController@indexAdmin");
+Route::get('/admin/pages/create', "PageController@create");
+Route::post('/admin/pages/store', "PageController@store");
+
+Route::get('/admin/pages/menu', "PageController@menu");
+
 
 // ----------------- ADMIN -----------------------
 

@@ -7,6 +7,7 @@
 
 require('./bootstrap');
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -16,6 +17,7 @@ require('./bootstrap');
 Vue.component('flash', require('./components/flash.vue'));
 Vue.component('role_permission_toggle', require('./components/role_permission_toggle.vue'));
 Vue.component('post_publisher', require('./components/post_publisher.vue'));
+//Vue.component('draggable', require('vuedraggable'));
 
 window.addEventListener('load', function () {
 

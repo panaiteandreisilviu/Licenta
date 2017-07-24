@@ -11,7 +11,6 @@ window.$ = window.jQuery = require('jquery');
 
 require('bootstrap-sass');
 
-require('pnotify');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -20,6 +19,10 @@ require('pnotify');
  */
 
 window.Vue = require('vue');
+
+window.PNotify = require('pnotify');
+
+window.Sortable = require('sortablejs');
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

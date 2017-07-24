@@ -29,6 +29,7 @@
             <li><a href="/admin"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
 
             <li><a href="/admin/users"><i class="fa fa-user"></i> <span>Users</span></a></li>
+            <li><a href="/admin/pages"><i class="fa fa-file"></i> <span>Pages</span></a></li>
             <li><a href="/admin/roles"><i class="fa fa-male"></i> <span>Roles</span></a></li>
             <li><a href="/admin/permissions"><i class="ion ion ion-unlocked"></i> <span>Permissions</span></a></li>
 
