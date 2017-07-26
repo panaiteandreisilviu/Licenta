@@ -35,7 +35,7 @@
 
             <li><a href="/admin/posts"><i class="fa fa-book"></i> <span>Posts</span></a></li>
 
-            <li>
+            {{--<li>
                 <a href="/admin/mail">
                     <i class="fa fa-envelope"></i> <span>Mailbox</span>
                     <span class="pull-right-container">
@@ -44,7 +44,7 @@
                       <small class="label pull-right bg-red">5</small>
                     </span>
                 </a>
-            </li>
+            </li>--}}
 
 
 

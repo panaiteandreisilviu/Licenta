@@ -90,12 +90,15 @@ class PageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Page  $page
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Page $page)
+    public function edit(Request $request)
     {
-        //
+        /*$page = Page::
+        dd($page);*/
+
+        return view('admin.pages.edit', compact('page'));
     }
 
     /**

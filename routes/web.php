@@ -30,6 +30,8 @@ Route::get('/pages/{page}', "PageController@index");
 Route::get('admin/pages', "PageController@indexAdmin");
 Route::get('/admin/pages/create', "PageController@create");
 Route::post('/admin/pages/store', "PageController@store");
+Route::get('/admin/pages/{page}/edit', "PageController@edit");
+Route::post('/admin/pages/{page}', "PageController@update");
 
 Route::get('/admin/pages/menu', "PageController@menu");
 
