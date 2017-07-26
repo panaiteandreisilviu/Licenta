@@ -17,17 +17,6 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-
-
-        $router=new Router();
-        $routes=$router->getRoutes(); // it will return all routes as an object
-
-        foreach ($routes as $value)
-        {
-            echo $value->getPath();
-        }
-        die();
-
         $permissions = Permission::all()->sortByDesc("created_at");
         return view('admin.permissions.index', compact('permissions'));
     }
