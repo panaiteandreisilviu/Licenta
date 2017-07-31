@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="{{ URL::asset('AdminLTE-2.3.11/plugins/datatables/dataTables.bootstrap.css') }}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ URL::asset('AdminLTE-2.3.11/plugins/select2/select2.min.css') }}">
     <!-- jvectormap -->
     <link rel="stylesheet" href="{{ URL::asset('AdminLTE-2.3.11/plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}">
     <!-- Theme style -->
@@ -50,7 +52,7 @@
         <section class="content">
 
             <div class="row">
-                <div class="col-xs-8 col-xs-offset-2">
+                <div class="col-xs-12">
                     @if(Session::has('success_message'))
                         <div class="alert alert-success">
                             {{ Session::get('success_message') }}

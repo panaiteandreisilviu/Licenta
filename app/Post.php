@@ -23,6 +23,11 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
+
     public function addComment($body){
         $this->comments()->create(compact('body'));
     }

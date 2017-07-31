@@ -22,7 +22,9 @@ Route::get('/post/{post}', "PostController@show");
 
 //Route::get('/profile', "ProfileController@index");
 Route::get('/profile/{user}', "ProfileController@show");
-Route::post('/profile/{user}', "ProfileController@update");
+
+Route::get('/profile/settings/{user}', "ProfileController@showSettings");
+Route::post('/profile/settings/{user}', "ProfileController@updateSettings");
 
 // ------ PAGES
 
@@ -31,9 +33,10 @@ Route::get('admin/pages', "PageController@indexAdmin");
 Route::get('/admin/pages/create', "PageController@create");
 Route::post('/admin/pages/store', "PageController@store");
 Route::get('/admin/pages/{page}/edit', "PageController@edit");
-Route::post('/admin/pages/{page}', "PageController@update");
+Route::put('/admin/pages/{page}', "PageController@update");
 
 Route::get('/admin/pages/menu', "PageController@menu");
+Route::post('/admin/pages/menu', "PageController@storeMenus");
 
 
 // ----------------- ADMIN -----------------------
@@ -61,6 +64,15 @@ Route::resource('/admin/roles', "RolesController");
 // ------ PERMISSIONS
 
 Route::resource('/admin/permissions', "PermissionsController");
+
+// ------ TAGS
+
+Route::resource('/admin/tags', "TagController");
+
+// ------ TAGS
+
+Route::get('/admin/settings', "SettingsController@index");
+Route::post('/admin/settings/store', 'SettingsController@store');
 
 // ------ ROLE -> PERMISSIONS
 

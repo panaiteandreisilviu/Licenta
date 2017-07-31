@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notifications\PostPublished;
@@ -38,6 +39,11 @@ class PostController extends Controller
         }
 
         $posts = $posts->get();
+
+        if($tag_name = request('tag')){
+            $tag = Tag::where('name', $tag_name)->first();
+            $posts = $tag->posts;
+        }
 
         return view('frontpage.posts.index', compact('posts'));
     }
@@ -111,6 +117,10 @@ class PostController extends Controller
         ]);
 
         $post = Post::orderBy('created_at', 'desc')->first();
+
+        foreach (request('tags') as $tag_id) {
+            $post->tags()->attach($tag_id);
+        }
 
         $request->session()->flash('success_message', 'Post successfully saved!');
 

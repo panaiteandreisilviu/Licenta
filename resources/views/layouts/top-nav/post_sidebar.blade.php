@@ -1,4 +1,35 @@
-<div class="box box-default">
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Tags</h3>
+
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+        </div>
+        <!-- /.box-tools -->
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <ol class="list-unstyled">
+            @foreach($tags as $tag)
+                <li>
+                    <a href="/?tag={{$tag->name}}">
+                        <button class="btn btn-default btn-block" style="margin-bottom: 10px; padding-left:7px;">
+                            <span class="pull-left" style="margin-top:3px;">
+                                {{$tag->name}}
+                            </span>
+                            <span class="label label-default pull-right" style="margin-top:6px;">{{$tag->posts->count()}}</span>
+                        </button>
+                    </a>
+                </li>
+            @endforeach
+        </ol>
+    </div>
+    <!-- /.box-body -->
+</div>
+
+
+<div class="box box-warning">
     <div class="box-header with-border">
         <h3 class="box-title">Archives</h3>
 
@@ -41,9 +72,9 @@
 </div>
 
 
-<div class="box box-default">
+<div class="box box-success">
     <div class="box-header with-border">
-        <h3 class="box-title">User posts</h3>
+        <h3 class="box-title">Posts by user</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -63,7 +94,7 @@
                         <button class="btn btn-default btn-block" style="margin-bottom: 10px; padding-left:7px;">
                             <span class="pull-left" style="margin-top:3px;">
                                 <img src="/storage/avatars/{{$user->id}}" onerror="this.src='/storage/avatars/default'" alt="User Image"
-                                     style="height:25px; border-radius: 50%; margin-right:3px; margin-top:-2px; border:1px solid #d5d5d5;">
+                                     style="height:25px; width:25px; border-radius: 50%; margin-right:3px; margin-top:-2px; border:1px solid #d5d5d5;">
                                 {{$user->name }}
                             </span>
                             <span class="label label-default pull-right" style="margin-top:6px;">{{$userArchive['no_posts']}}</span>

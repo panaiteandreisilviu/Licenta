@@ -23,9 +23,12 @@
 
                     @include('layouts.errors')
 
-                    <form method="POST" action="/admin/pages" enctype="multipart/form-data">
+                    <form method="POST" action="/admin/pages/{{$page->slug}}" enctype="multipart/form-data">
 
+                        @include('layouts.errors')
+                        {{ method_field('PUT') }}
                         {{csrf_field()}}
+
                         <div class="form-group">
                             <label for="post_title">Page slug</label>
                             <input type="text" class="form-control" name="slug" id="slug" placeholder="Page slug" value="{{$page->slug}}">
@@ -36,10 +39,19 @@
                             <input type="text" class="form-control" name="title" id="title" placeholder="Page title" value="{{$page->title}}">
                         </div>
 
+                        <div class="form-group">
+                            <label for="post_title">Menu title</label>
+                            <input type="text" class="form-control" name="menu_title" id="menu_title" placeholder="Menu title" value="{{$page->menu_title}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="post_title">Menu icon</label>
+                            <input type="text" class="form-control" name="menu_icon" id="menu_icon" placeholder="Menu icon" value="{{$page->menu_icon}}">
+                        </div>
 
                         <div class="form-group">
                             <label for="page_editor">Page content</label>
-                            <textarea id="page_editor" name="content" rows="6" cols="80">{!! $page->content !!}</textarea>
+                            <textarea id="page_editor" name="content" rows="6" cols="80">{!! $page->getContent() !!}</textarea>
                         </div>
 
                         <div class="box-footer">

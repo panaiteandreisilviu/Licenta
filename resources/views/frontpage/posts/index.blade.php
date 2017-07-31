@@ -127,7 +127,7 @@
     </div>
 
     <div class="col-sm-4 hidden-xs">
-        @include('layouts.top-nav.sidebar')
+        @include('layouts.top-nav.post_sidebar')
     </div>
 
 @endsection

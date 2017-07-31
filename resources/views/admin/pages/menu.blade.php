@@ -52,58 +52,61 @@
     <script>
         // Simple list
         $(function(){
-            var menuItems = [['group1-1','group1-2','group1-3'], ['group2-1','group2-2','group2-3'], ['group3-1','group3-2','group3-3']];
 
+            var menuItems = {!! json_encode($menuItems) !!};
 
             // Generate Menu lists
-            for(var i = 0; i < menuItems.length; i++){
-                var $listContainer = $('<div>').addClass('col-xs-12 panel panel-default menu-group');
-                var $list = $('<ul>');
-                $list.addClass('list-group');
-                $list.attr('group', 'menu-group');
+            for (var menuTitle in menuItems) {
+                if (menuItems.hasOwnProperty(menuTitle)) {
 
-                var $listContainerBody = $('<div>').addClass('panel panel-body some-padding');
-                var $listTitle = $('<input>')
-                    .addClass('form-control')
-                    .attr('name', 'title_' + i);
+                    var $listContainer = $('<div>').addClass('col-xs-12 panel panel-default menu-group');
+                    var $list = $('<ul>');
+                    $list.addClass('list-group');
+                    $list.attr('group', 'menu-group');
 
-                $listContainerBody
-                    .append($listTitle);
+                    var $listContainerBody = $('<div>').addClass('panel panel-body some-padding');
+                    var $listTitle = $('<input>')
+                        .addClass('form-control')
+                        .val(menuTitle);
+                        //.attr('name', 'title_' + i);
 
-                $listContainer
-                    .append($('<i>')
-                        .addClass('glyphicon glyphicon-move glyphicon-move-menu')
-                        .css({
-                            'float' : 'right',
-                            'margin-top': '5px',
-                            'margin-right': '-10px',
-                            'font-size': '17px'
-                        })
-                    );
+                    $listContainerBody
+                        .append($listTitle);
 
-                $listContainer.append($listContainerBody);
-                $listContainer.append($list);
+                    $listContainer
+                        .append($('<i>')
+                            .addClass('glyphicon glyphicon-move glyphicon-move-menu')
+                            .css({
+                                'float' : 'right',
+                                'margin-top': '5px',
+                                'margin-right': '-10px',
+                                'font-size': '17px'
+                            })
+                        );
 
-                for(var j = 0; j < menuItems[i].length; j++) {
+                    $listContainer.append($listContainerBody);
+                    $listContainer.append($list);
 
-                    //Create each LI element
-                    var $menuItem = $('<li>')
-                        .append($('<i>').addClass('glyphicon glyphicon-move'))
-                        .append(' ')
-                        .append(menuItems[i][j]);
-                    $menuItem.addClass('list-group-item');
-                    $list.append($menuItem);
+                    for(var j = 0; j < menuItems[menuTitle].length; j++) {
+
+                        //Create each LI element
+                        var $menuItem = $('<li>')
+                            .append($('<i>').addClass('glyphicon glyphicon-move'))
+                            .append(' ')
+                            .append(menuItems[menuTitle][j]);
+                        $menuItem.addClass('list-group-item');
+                        $list.append($menuItem);
+                    }
+
+                    $("#menuGroupsContainer").append($listContainer);
+                    Sortable.create($list[0], {
+                        group: 'menu-items',
+                        handle: '.glyphicon-move',
+                        animation: 150
+                    });
+
+
                 }
-
-                $("#menuGroupsContainer").append($listContainer);
-                Sortable.create($list[0], {
-                    group: 'menu-items',
-                    handle: '.glyphicon-move',
-                    animation: 150
-                });
-
-
-
             }
 
             Sortable.create($('#menuGroupsContainer')[0], {
@@ -117,8 +120,19 @@
                 $('.menu-group').each(function(index,group){
                     var title = $(group).find('input').val();
                     var items = $.map($(group).find('li'), function(item) { return $(item).text(); });
-                    console.log(items);
+                    data[title] = items;
+                });
+
+                axios.post('/admin/pages/menu', {
+                    'menuItems': data
                 })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+
             })
         });
     </script>

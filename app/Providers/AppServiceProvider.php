@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('layouts.top-nav.sidebar', function($view){
+        view()->composer('layouts.top-nav.post_sidebar', function($view){
 
             // Post Count
             $posts = \App\Post::latest()->where('published', '=' , '1');
@@ -25,7 +25,10 @@ class AppServiceProvider extends ServiceProvider
             // User archives
             $userArchives = \App\Post::archivesByUser();
 
-            $view->with(['archives' => $archives, 'userArchives' => $userArchives, 'postCount' => $postCount]);
+            // Tags
+            $tags = \App\Tag::all();
+
+            $view->with(compact('archives', 'userArchives', 'postCount', 'tags'));
         });
     }
 

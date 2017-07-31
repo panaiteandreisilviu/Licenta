@@ -48,4 +48,17 @@ return [
         'access_token'    => getenv('FACEBOOK_ACCESS_TOKEN'),
     ]
 
+    /*    'twitter' => [
+        'consumer_key'    => Settings::all()->first() ?  Settings::all()->first()->TWITTER_CONSUMER_KEY : '',
+        'consumer_secret' => Settings::all()->first() ?  Settings::all()->first()->TWITTER_CONSUMER_SECRET : '',
+        'access_token'    => Settings::all()->first() ?  Settings::all()->first()->TWITTER_ACCESS_TOKEN : '',
+        'access_secret'   => Settings::all()->first() ?  Settings::all()->first()->TWITTER_ACCESS_SECRET : '',
+    ],
+
+    'facebook_poster' => [
+        'app_id'    => Settings::all()->first() ?  Settings::all()->first()->FACEBOOK_APP_ID : '',
+        'app_secret' => Settings::all()->first() ?  Settings::all()->first()->FACEBOOK_APP_SECRET : '',
+        'access_token'    => Settings::all()->first() ?  Settings::all()->first()->FACEBOOK_ACCESS_TOKEN : '',
+    ]*/
+
 ];

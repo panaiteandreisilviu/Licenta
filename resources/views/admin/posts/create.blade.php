@@ -42,6 +42,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label>Tags</label>
+                            <select class="select2" name="tags[]" multiple="multiple" data-placeholder="Select tags"
+                                    style="width: 100%;">
+                                @foreach(\App\Tag::all() as $tag)
+                                    <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label for="post_image" class="control-label">Post cover</label>
                             <img src="" onerror="" class="img-responsive pad" id="image_preview"
                                  style="max-width: 289px; padding:0; margin-bottom:5px;" alt="">
@@ -114,6 +124,9 @@
         $(function () {
             CKEDITOR.replace('post_editor');
 //            $(".textarea").wysihtml5();
+
+            //Initialize Select2 Elements
+            $(".select2").select2();
 
         });
 

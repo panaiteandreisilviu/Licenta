@@ -54,6 +54,16 @@ class ProfileController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function showSettings(User $user)
+    {
+        return view('frontpage.profile.showSettings', compact('user'));
+    }
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

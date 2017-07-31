@@ -2,9 +2,9 @@
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->
-        <div class="user-panel">
+        <div class="user-panel" style="padding-bottom: 30px;">
             <div class="pull-left image">
-                <img src="/storage/avatars/{{Auth::user()->id}}" onerror="this.src='/storage/avatars/default'" class="img-circle" alt="User Image">
+                <img src="/storage/avatars/{{Auth::user()->id}}" onerror="this.src='/storage/avatars/default'" class="img-circle" alt="User Image" style="height:45px;">
             </div>
             <div class="pull-left info">
                 <p>{{Auth::user()->name}}</p>
@@ -26,14 +26,19 @@
         <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
 
-            <li><a href="/admin"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
+            <li><a href="/admin"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
             <li><a href="/admin/users"><i class="fa fa-user"></i> <span>Users</span></a></li>
+            <li><a href="/admin/tags"><i class="fa fa-tags"></i> <span>Tags</span></a></li>
+            <li><a href="/admin/posts"><i class="fa fa-book"></i> <span>Posts</span></a></li>
             <li><a href="/admin/pages"><i class="fa fa-file"></i> <span>Pages</span></a></li>
             <li><a href="/admin/roles"><i class="fa fa-male"></i> <span>Roles</span></a></li>
             <li><a href="/admin/permissions"><i class="ion ion ion-unlocked"></i> <span>Permissions</span></a></li>
 
-            <li><a href="/admin/posts"><i class="fa fa-book"></i> <span>Posts</span></a></li>
+
+            <li><a href="/admin/settings"><i class="fa fa-key"></i> <span>Settings and API Keys</span></a></li>
+
+            <li><a href="/"><i class="fa fa-home"></i> <span>Frontend</span></a></li>
 
             {{--<li>
                 <a href="/admin/mail">
