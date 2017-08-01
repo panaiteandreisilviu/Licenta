@@ -87,7 +87,7 @@
 
                 </div>
                 <div class="box-body">
-                    <form method="POST" class="form-horizontal" action="/profile/{{$user->id}}" enctype="multipart/form-data">
+                    <form method="POST" class="form-horizontal" action="/profile/settings/{{$user->id}}" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="form-group">
                             <label for="profilePicture" class="col-sm-2 control-label">Profile picture</label>

@@ -81,7 +81,7 @@ class ProfileController extends Controller
      * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(ProfileRequest $request, User $user)
+    public function updateSettings(ProfileRequest $request, User $user)
     {
 //        $task = Task::findOrFail($id);
 //        $this->validate($request, [
