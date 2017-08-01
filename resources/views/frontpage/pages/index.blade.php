@@ -34,6 +34,15 @@
                 {!! $page->getContent() !!}
             </div>
             <!-- /.box-body -->
+
+            @role('admin')
+                <div class="box-footer">
+                    <a href="/admin/pages/{{$page->slug}}/edit" class="btn btn-xs btn-default pull-right">
+                        <i class="fa fa-edit"></i> Edit
+                    </a>
+                </div>
+            @endrole
+
         </div>
 
 
