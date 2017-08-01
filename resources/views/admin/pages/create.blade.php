@@ -77,7 +77,6 @@
         $(function () {
             CKEDITOR.replace('page_editor');
 //            $(".textarea").wysihtml5();
-
         });
     </script>
 
