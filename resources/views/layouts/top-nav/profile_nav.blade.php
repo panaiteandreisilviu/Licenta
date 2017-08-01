@@ -36,11 +36,17 @@
                 <a href="/profile/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
             </div>
 
-            @role('admin')
-            <div class="pull-left" style="margin-left:2px;">
-                <a href="/admin" class="btn btn-default btn-flat">Admin console</a>
-            </div>
-            @endrole
+            @if(!preg_match( '/admin/', Request::path()))
+                @role('admin')
+                <div class="pull-left" style="margin-left:2px;">
+                    <a href="/admin" class="btn btn-default btn-flat">Admin console</a>
+                </div>
+                @endrole
+            @else
+                <div class="pull-left" style="margin-left:6px;">
+                    <a href="/" class="btn btn-default btn-flat">Landing page</a>
+                </div>
+            @endif
 
             <div class="pull-right">
                 <a href="/logout" class="btn btn-default btn-flat">Sign out</a>

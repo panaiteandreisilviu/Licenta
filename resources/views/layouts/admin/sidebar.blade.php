@@ -38,7 +38,7 @@
 
             <li><a href="/admin/settings"><i class="fa fa-key"></i> <span>Settings and API Keys</span></a></li>
 
-            <li><a href="/"><i class="fa fa-home"></i> <span>Frontend</span></a></li>
+            <li><a href="/"><i class="fa fa-home"></i> <span>Landing page</span></a></li>
 
             {{--<li>
                 <a href="/admin/mail">
