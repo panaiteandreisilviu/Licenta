@@ -37,6 +37,10 @@
 
             @role('admin')
                 <div class="box-footer">
+                    <a href="/admin/pages" class="btn btn-xs btn-default pull-right">
+                        <i class="fa fa-file-o"></i> All pages
+                    </a>
+                    &nbsp;&nbsp;
                     <a href="/admin/pages/{{$page->slug}}/edit" class="btn btn-xs btn-default pull-right">
                         <i class="fa fa-edit"></i> Edit
                     </a>
@@ -48,7 +52,7 @@
 
     </div>
 
-    <div class="col-sm-4 hidden-xs">
+    <div class="col-sm-4 hidden-xs" data-spy="affix">
         @include('layouts.top-nav.post_sidebar')
     </div>
 

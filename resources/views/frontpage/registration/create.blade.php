@@ -77,7 +77,8 @@
                 {{--Google+</a>--}}
         </div>
 
-        <a href="/login" class="text-center">I already have a membership</a>
+        <a href="/login" class="text-center">I already have a membership</a><br>
+        <a href="/privacy-policy" class="text-center">Privacy policy</a>
     </div>
     <!-- /.form-box -->
 </div>

@@ -71,7 +71,8 @@
         <!-- /.social-auth-links -->
 
         <a href="#">I forgot my password</a><br>
-        <a href="/register" class="text-center">Register a new membership</a>
+        <a href="/register" class="text-center">Register a new membership</a><br>
+        <a href="/privacy-policy" class="text-center">Privacy policy</a>
 
     </div>
     <!-- /.login-box-body -->

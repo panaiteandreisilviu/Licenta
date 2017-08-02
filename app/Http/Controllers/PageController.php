@@ -33,6 +33,10 @@ class PageController extends Controller
         return view('admin.pages.index', compact('pages'));
     }
 
+    public function privacyPolicy(){
+        return view('frontpage.pages.privacy_policy');
+    }
+
     public function menu()
     {
 

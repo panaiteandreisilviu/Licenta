@@ -31,6 +31,10 @@
 
     {{--@include('layouts.top-nav.nav')--}}
 
+    <style>
+        html,body { height:100%; !important; }
+    </style>
+
     <header class="main-header">
         <!-- Logo -->
         <a href="/" class="logo">
@@ -206,7 +210,7 @@
     </aside>
 
     <!-- Full Width Column -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="display:inline-block">
             <!-- Content Header (Page header) -->
         @include('layouts.admin.title-breadcrumb', ['title' => isset($title) ? $title : null, 'subtitle' => isset($subtitle) ? $subtitle : null, 'breadcrumbs' => \App\Breadcrumbs::get(Request::path())])
             <!-- Main content -->
@@ -227,6 +231,8 @@
 <script src={{ URL::asset('AdminLTE-2.3.11/plugins/jQuery/jquery-2.2.3.min.js') }}></script>
 <!-- Bootstrap 3.3.6 -->
 <script src={{ URL::asset('AdminLTE-2.3.11/bootstrap/js/bootstrap.min.js') }}></script>
+<!-- Bootstrap 3.3.6 Affix-->
+<script src={{ URL::asset('AdminLTE-2.3.11/bootstrap/js/bootstrap_plugins/affix.js') }}></script>
 <!-- SlimScroll -->
 <script src={{ URL::asset('AdminLTE-2.3.11/plugins/slimScroll/jquery.slimscroll.min.js') }}></script>
 <!-- FastClick -->

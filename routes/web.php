@@ -38,6 +38,7 @@ Route::put('/admin/pages/{page}', "PageController@update");
 Route::get('/admin/pages/menu', "PageController@menu");
 Route::post('/admin/pages/menu', "PageController@storeMenus");
 
+Route::get('/privacy-policy', "PageController@privacyPolicy");
 
 // ----------------- ADMIN -----------------------
 
