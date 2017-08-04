@@ -223,6 +223,6 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
 
     echo '<pre>' . print_r('------------------------',1) . '<pre>';
 
-    echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
+    echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
 
 });
