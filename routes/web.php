@@ -197,11 +197,10 @@ Route::get('/facebook/test/get_page_token', function(SammyK\LaravelFacebookSdk\L
     echo '<pre>' . print_r('------------------------',1) . '<pre>';
 
     foreach ($response->getGraphEdge() as $node) {
-        echo '<pre>' . print_r($node,1) . '<pre>';
+        echo '<pre>' . print_r($node->access_token,1) . '<pre>';
+        echo '<pre>' . print_r($node->getGraphNode('access_token'),1) . '<pre>';
     }
 
     echo '<pre>' . print_r('------------------------',1) . '<pre>';
-
-    echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
 
 });
