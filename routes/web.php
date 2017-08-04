@@ -219,10 +219,42 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
         dd($e->getMessage());
     }
 
-    echo '<pre>' . print_r($response,1) . '<pre>';
-
-    echo '<pre>' . print_r('------------------------',1) . '<pre>';
 
     echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
+
+    $post_id = $response->getGraphNode()->getField('id');
+
+    try {
+        $response = $fb->post('/' . $post_id, ['message' => 'Test post from sdk 2.... '] , Session::get('fb_page_access_token'));
+    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+
+    // ---------------- Add image to post ----------------
+
+});
+
+
+// Endpoint that is redirected to after an authentication attempt
+Route::get('/facebook/test/insights', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+{
+    try {
+        $response = $fb->get('/' .  Session::get('fb_page_app_id') . '/insights', Session::get('fb_page_access_token'));
+    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+
+    echo '<pre>' . print_r($response,1) . '<pre>';
+
+    echo '<pre>' . print_r('--------------------------',1) . '<pre>';
+
+    echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
+
+    echo '<pre>' . print_r('--------------------------',1) . '<pre>';
+
+    echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
+
 
 });
