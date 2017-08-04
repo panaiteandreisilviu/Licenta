@@ -187,11 +187,11 @@ Route::get('/facebook/test/get_user', function(SammyK\LaravelFacebookSdk\Laravel
 Route::get('/facebook/test/get_page_token', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
     try {
-        $response = $fb->get('/me?fields=id,name,email', Session::get('fb_user_access_token'));
+        $response = $fb->get('/me/accounts', Session::get('fb_user_access_token'));
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
 
-    $userNode = $response->getGraphUser();
-    print_r($userNode);
+    echo '<pre>' . print_r($response,1) . '<pre>';
+
 });
