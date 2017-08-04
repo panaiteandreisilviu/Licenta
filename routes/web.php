@@ -173,21 +173,12 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
 // Endpoint that is redirected to after an authentication attempt
 Route::get('/facebook/test', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
-    $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-
-//    try {
-//        $response = $fb->get('/709511829232448/posts');
-//    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-//        dd($e->getMessage());
-//    }
-
     try {
-        $response = $fb->get('/1857730571156494?fields=access_token', "");
+        $response = $fb->get('/me?fields=id,name,email', Session::get('fb_user_access_token'));
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
 
-
-    dd($response);
-
+    $userNode = $response->getGraphUser();
+    print_r($userNode);
 });
