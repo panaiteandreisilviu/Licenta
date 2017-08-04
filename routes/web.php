@@ -200,8 +200,28 @@ Route::get('/facebook/test/get_page_token', function(SammyK\LaravelFacebookSdk\L
         echo '<pre>' . print_r($node->getField('id'),1) . '<pre>';
         echo '<pre>' . print_r($node->getField('name'),1) . '<pre>';
         echo '<pre>' . print_r($node->getField('access_token'),1) . '<pre>';
+
+        Session::put('fb_page_access_token', $node->getField('access_token'));
+
     }
 
     echo '<pre>' . print_r('------------------------',1) . '<pre>';
+
+});
+
+// Endpoint that is redirected to after an authentication attempt
+Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+{
+    try {
+        $response = $fb->post('/me/accounts', ['message' => 'Test post from sdk .... '] , Session::get('fb_page_access_token'));
+    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+    echo '<pre>' . print_r($response,1) . '<pre>';
+
+    echo '<pre>' . print_r('------------------------',1) . '<pre>';
+
+    echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
 
 });
