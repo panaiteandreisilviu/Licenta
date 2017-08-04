@@ -247,14 +247,8 @@ Route::get('/facebook/test/insights', function(SammyK\LaravelFacebookSdk\Laravel
 
 
     echo '<pre>' . print_r($response,1) . '<pre>';
-
-    echo '<pre>' . print_r('--------------------------',1) . '<pre>';
-
+    echo '<pre>' . print_r('--------------------------------',1) . '<pre>';
     echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
-
-    echo '<pre>' . print_r('--------------------------',1) . '<pre>';
-
-    echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
 
 
 });
