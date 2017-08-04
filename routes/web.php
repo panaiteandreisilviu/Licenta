@@ -240,7 +240,7 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
 Route::get('/facebook/test/insights', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
     try {
-        $response = $fb->get('/' .  Session::get('fb_page_app_id') . '/insights', Session::get('fb_page_access_token'));
+        $response = $fb->get('/' .  Session::get('fb_page_app_id') . '/insights/page_stories', Session::get('fb_page_access_token'));
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
