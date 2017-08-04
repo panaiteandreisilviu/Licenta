@@ -237,8 +237,11 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
 
 
 // Endpoint that is redirected to after an authentication attempt
-Route::get('/facebook/test/insights', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+Route::get('/facebook/test/insights/{metric}', function($metric)
 {
+    echo '<pre>' . print_r($metric,1) . '<pre>';
+    die();
+
     try {
         $response = $fb->get('/' .  Session::get('fb_page_app_id') . '/insights/page_impressions', Session::get('fb_page_access_token'));
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
