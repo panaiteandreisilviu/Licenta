@@ -88,6 +88,7 @@ class Post extends Model
             throw new Exception('Please set the page access token');
         }
 
+
         $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
         /*try {

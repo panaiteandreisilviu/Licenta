@@ -216,7 +216,7 @@ Route::get('/facebook/test/get_page_token', function(SammyK\LaravelFacebookSdk\L
 Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
     try {
-        $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/feed', ['message' => 'Test post from sdk 2.... '] , Session::get('fb_page_access_token'));
+        $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/feed', ['message' => 'Test post from sdk 3.... '] , Session::get('fb_page_access_token'));
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
@@ -225,6 +225,8 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
     echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
 
     $post_id = $response->getGraphNode()->getField('id');
+
+    dd($post_id);
 
 //    try {
 //        $response = $fb->post('/' . $post_id, ['message' => 'Test post from sdk 2.... '] , Session::get('fb_page_access_token'));
