@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel" style="padding-bottom: 30px;">
             <div class="pull-left image">
-                <img src="/storage/avatars/{{Auth::user()->id}}" onerror="this.src='/storage/avatars/default'" class="img-circle" alt="User Image" style="height:45px;">
+                <img src="{{Auth::user()->picture_url}}" onerror="this.src='/storage/avatars/default'" class="img-circle" alt="User Image" style="height:45px;">
             </div>
             <div class="pull-left info">
                 <p>{{Auth::user()->name}}</p>

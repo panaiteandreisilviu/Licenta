@@ -19,7 +19,7 @@
             <div class="box box-widget {{--collapsed-box--}}">
                 <div class="box-header with-border">
                     <div class="user-block">
-                        <img class="img-circle" src="/storage/avatars/{{$post->user()->id}}" onerror="this.src='/storage/avatars/default'" alt="User Image">
+                        <img class="img-circle" src="{{$post->user()->picture_url}}" onerror="this.src='/storage/avatars/default'" alt="User Image">
                         <span class="username"><a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a> <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> - {{$post->title}}</span></span>
                         <span class="description">{{$post->created_at->diffForHumans()}}</span>
                     </div>

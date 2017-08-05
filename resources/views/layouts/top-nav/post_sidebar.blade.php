@@ -93,7 +93,7 @@
                         ?>
                         <button class="btn btn-default btn-block" style="margin-bottom: 10px; padding-left:7px;">
                             <span class="pull-left" style="margin-top:3px;">
-                                <img src="/storage/avatars/{{$user->id}}" onerror="this.src='/storage/avatars/default'" alt="User Image"
+                                <img src="{{$user->picture_url}}" onerror="this.src='/storage/avatars/default'" alt="User Image"
                                      style="height:25px; width:25px; border-radius: 50%; margin-right:3px; margin-top:-2px; border:1px solid #d5d5d5;">
                                 {{$user->name }}
                             </span>
