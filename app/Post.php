@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Mockery\Exception;
 
 class Post extends Model
 {
@@ -78,8 +79,8 @@ class Post extends Model
 
         $page_access_token = Session::get('page_access_token');
         $page_id = Session::get('fb_page_app_id');
-        if(!$page_access_token || !$page_access_token) {
-            return false;
+        if(!$page_access_token || !$page_id) {
+            throw new Exception('No page access token');
         }
 
         $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
@@ -91,6 +92,8 @@ class Post extends Model
         }
 
         $facebook_post_id = $response->getGraphNode()->getField('id');
+        dd($facebook_post_id);
+
         $this->facebook_post_id = $facebook_post_id;
 
         $this->save();
