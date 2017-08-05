@@ -16,7 +16,7 @@ class Facebook extends Model
             return array();
         }
 
-        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+        $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
         try {
             $response = $fb->get('/me/accounts', $fb_user_access_token);
