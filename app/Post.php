@@ -77,7 +77,7 @@ class Post extends Model
      */
     public function publishFacebook(){
 
-        $page_access_token = Session::get('page_access_token');
+        $page_access_token = Session::get('fb_page_access_token');
         $page_id = Session::get('fb_page_app_id');
         if(!$page_access_token || !$page_id) {
             throw new Exception('No page access token');
