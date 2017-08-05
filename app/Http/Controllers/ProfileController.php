@@ -59,9 +59,9 @@ class ProfileController extends Controller
      * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function showSettings(User $user)
+    public function profileSettings(User $user)
     {
-        return view('frontpage.profile.showSettings', compact('user'));
+        return view('frontpage.profile.profile_settings', compact('user'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -81,7 +81,7 @@ class ProfileController extends Controller
      * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function updateSettings(ProfileRequest $request, User $user)
+    public function updateProfileSettings(ProfileRequest $request, User $user)
     {
 
         if($request->file('profilePicture')){

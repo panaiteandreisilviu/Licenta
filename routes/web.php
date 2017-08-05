@@ -24,8 +24,11 @@ Route::get('/post/{post}', "PostController@show");
 //Route::get('/profile', "ProfileController@index");
 Route::get('/profile/{user}', "ProfileController@show");
 
-Route::get('/profile/settings/{user}', "ProfileController@showSettings");
-Route::post('/profile/settings/{user}', "ProfileController@updateSettings");
+Route::get('/profile/settings/{user}', "ProfileController@profileSettings");
+Route::post('/profile/settings/{user}', "ProfileController@updateProfileSettings");
+
+Route::get('/profile/account/{user}', "ProfileController@account");
+
 
 // ------ PAGES
 

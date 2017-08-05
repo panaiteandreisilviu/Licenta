@@ -15,20 +15,22 @@
         </li>
         <!-- Menu Body -->
 
-        {{--<li class="user-body">
+        <li class="user-body">
             <div class="row">
                 <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                    <a href="/profile/settings/{{Auth::user()->id}}">Settings</a>
                 </div>
+
                 <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
+                    <a href="/profile/account/{{Auth::user()->id}}">Account</a>
                 </div>
+
                 <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
+                    <a href="#">Activity</a>
                 </div>
             </div>
             <!-- /.row -->
-        </li>--}}
+        </li>
 
         <!-- Menu Footer-->
         <li class="user-footer">

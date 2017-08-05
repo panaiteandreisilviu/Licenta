@@ -18,7 +18,7 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">3,200</h5>
-                                <span class="description-text">SALES</span>
+                                <span class="description-text">Position</span>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -26,7 +26,7 @@
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
                                 <h5 class="description-header">13,000</h5>
-                                <span class="description-text">FOLLOWERS</span>
+                                <span class="description-text">Department </span>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -34,7 +34,7 @@
                         <div class="col-sm-4">
                             <div class="description-block">
                                 <h5 class="description-header">35</h5>
-                                <span class="description-text">PRODUCTS</span>
+                                <span class="description-text">Email</span>
                             </div>
                             <!-- /.description-block -->
                         </div>
@@ -45,7 +45,108 @@
             </div>
         </div>
 
-        <div class="col-xs-12">
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+
+                    <p class="text-muted text-center"><b>General</b></p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <i class="fa fa-user"></i> Full name <a class="pull-right">---</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-sitemap"></i> Position <a class="pull-right">---</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-building-o"> </i> Department <a class="pull-right">---</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+
+                    <p class="text-muted text-center"><b>About</b></p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <i class="fa fa-university"></i> Went to <a class="pull-right">1,322</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-home"></i> Lives in <a class="pull-right">1,322</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-map-marker"></i> From <a class="pull-right">1,322</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-body box-profile">
+
+                    <p class="text-muted text-center"><b>Activity</b></p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <i class="fa fa-book"></i> Posts <a class="pull-right">1,322</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-file-o"></i> Pages <a class="pull-right">1,322</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-calendar"> </i> Joined <a class="pull-right">---</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-info">
+                <div class="box-body box-profile">
+
+                    <p class="text-muted text-center"><b>Contact</b></p>
+
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <i class="fa fa-envelope-o"></i> Email <a class="pull-right">1,322</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-phone"></i> Phone <a class="pull-right">1,322</a>
+                        </li>
+
+                        <li class="list-group-item">
+                            <i class="fa fa-globe"></i> Website <a class="pull-right">1,322</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+
+        {{--<div class="col-xs-12">
             <!-- The time line -->
             <ul class="timeline">
                 <!-- timeline time label -->
@@ -137,7 +238,7 @@
                     <i class="fa fa-clock-o bg-gray"></i>
                 </li>
             </ul>
-        </div>
+        </div>--}}
 
     </div>
     <!-- /.row -->
