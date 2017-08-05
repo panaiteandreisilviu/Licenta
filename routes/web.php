@@ -15,6 +15,7 @@
 
 // ------ POSTS
 Route::get('/', "PostController@index")->name("frontpage");
+Route::get('/home', function(){ redirect('/'); });
 Route::get('/posts', "PostController@index");
 Route::get('/post/{post}', "PostController@show");
 
