@@ -165,7 +165,7 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     $user = App\User::createOrUpdateGraphNode($facebook_user);
 
 
-    // Get user picture
+    // ---------------------Get user profile picture ---------------------
 
     try {
         $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal',  Session::get('fb_user_access_token'));
@@ -176,6 +176,23 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
 
     $pictureData = $response->getGraphNode()->asArray();
     $pictureUrl = $pictureData['url'];
+
+    $user->picture_url = $pictureUrl;
+    $user->save();
+
+    // ---------------------Get user cover picture ---------------------
+
+    try {
+        $response = $fb->get('/me?fields=cover',  Session::get('fb_user_access_token'));
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+    echo '<pre>' . print_r($response,1) . '<pre>';
+
+    echo '<pre>' . print_r($response->getGraphNode()->asArray(),1) . '<pre>';
+
+    die();
 
     $user->picture_url = $pictureUrl;
     $user->save();

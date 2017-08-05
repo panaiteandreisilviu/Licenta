@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->integer('active')->default(1);
             $table->dateTime('inactivated_at')->nullable();
             $table->text('picture_url')->nullable();
+            $table->text('cover_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
