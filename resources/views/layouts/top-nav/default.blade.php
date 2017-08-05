@@ -210,7 +210,7 @@
     </aside>
 
     <!-- Full Width Column -->
-    <div class="content-wrapper" style="display:inline-block">
+    <div class="content-wrapper" {{--style="display:inline-block"--}}>
             <!-- Content Header (Page header) -->
         @include('layouts.admin.title-breadcrumb', ['title' => isset($title) ? $title : null, 'subtitle' => isset($subtitle) ? $subtitle : null, 'breadcrumbs' => \App\Breadcrumbs::get(Request::path())])
             <!-- Main content -->
