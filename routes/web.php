@@ -176,7 +176,6 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
 
     $pictureData = $response->getGraphNode()->asArray();
     $pictureUrl = $pictureData['url'];
-    dd($pictureUrl);
 
     $user->picture_url = $pictureUrl;
     $user->save;
