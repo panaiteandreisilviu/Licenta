@@ -3,6 +3,7 @@
 namespace App;
 
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\App;
@@ -76,14 +77,15 @@ class Post extends Model
     public function publishFacebook(){
 
         $page_access_token = Session::get('page_access_token');
-        if(!$page_access_token) {
+        $page_id = Session::get('fb_page_app_id');
+        if(!$page_access_token || !$page_access_token) {
             return false;
         }
 
         $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
         try {
-            $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/feed', ['message' => $this->body] , $page_access_token);
+            $response = $fb->post("/$page_id/feed", ['message' => $this->body] , $page_access_token);
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             dd($e->getMessage());
         }
