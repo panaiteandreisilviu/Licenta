@@ -24,7 +24,8 @@ class Facebook extends Model
             dd($e->getMessage());
         }
 
-        $accounts = $response->getGraphEdge();
+        $accountsEdge = $response->getGraphEdge();
+        $accounts = $accountsEdge->getGraphNode('items');
         /*foreach ($response->getGraphEdge() as $node) {
             echo '<pre>' . print_r($node->getField('id'), 1) . '<pre>';
             echo '<pre>' . print_r($node->getField('name'), 1) . '<pre>';
