@@ -57,6 +57,17 @@
                         <div class="alert alert-success">
                             {{ Session::get('success_message') }}
                         </div>
+
+                    @elseif(Session::has('warning_message'))
+                        <div class="alert alert-warning">
+                            {{ Session::get('warning_message') }}
+                        </div>
+
+                    @elseif(Session::has('error_message'))
+                        <div class="alert alert-danger">
+                            {{ Session::get('error_message') }}
+                        </div>
+
                     @endif
                 </div>
             </div>

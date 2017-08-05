@@ -79,17 +79,24 @@ class Post extends Model
 
         $page_access_token = Session::get('fb_page_access_token');
         $page_id = Session::get('fb_page_app_id');
-        if(!$page_access_token || !$page_id) {
-            throw new Exception('No page access token');
+
+        if(!$page_id) {
+            throw new Exception('Please set the page id');
+        }
+
+        if(!$page_access_token) {
+            throw new Exception('Please set the page access token');
         }
 
         $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
 
-        try {
+        /*try {
             $response = $fb->post("/$page_id/feed", ['message' => $this->body] , $page_access_token);
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             dd($e->getMessage());
-        }
+        }*/
+
+        $response = $fb->post("/$page_id/feed", ['message' => $this->body] , $page_access_token);
 
         $facebook_post_id = $response->getGraphNode()->getField('id');
         dd($facebook_post_id);
