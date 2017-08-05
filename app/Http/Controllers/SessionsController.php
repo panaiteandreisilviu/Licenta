@@ -39,6 +39,7 @@ class SessionsController extends Controller
         auth()->logout();
 
         Session::forget('fb_page_app_id');
+        Session::forget('fb_user_access_token');
         Session::forget('fb_page_access_token');
 
         return redirect()->route("login");
