@@ -48,7 +48,7 @@
                                         <td>{{$account['name']}}</td>
                                         <td>{{$account['category']}}</td>
                                         <td>
-                                            <a href="/facebook/retrievePageAccessToken/{{$account['id']}}" class="btn btn-primary btn-xs retrievePageAccessToken"
+                                            <a href="#" class="btn btn-primary btn-xs retrievePageAccessToken"
                                                data-fb_page_app_id="{{$account['id']}}" data-fb_page_access_token="{{$account['access_token']}}">
                                                 <i class="fa fa-edit"></i> Get token
                                             </a>
@@ -134,7 +134,8 @@
 //            "autoWidth": false
             });
 
-            $('.retrievePageAccessToken').on('click', function(){
+            $('.retrievePageAccessToken').on('click', function(event){
+                event.preventDefault();
 
                 var fb_page_app_id = $(this).data('fb_page_app_id');
                 var fb_page_access_token = $(this).data('fb_page_access_token');
