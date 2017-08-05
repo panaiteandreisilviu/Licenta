@@ -21,7 +21,6 @@ class CreateUserProfilesTable extends Migration
             $table->string('location')->nullable();
             $table->string('skills')->nullable();
             $table->string('notes')->nullable();
-            $table->string('profile_picture_filename');
             $table->timestamps();
         });
     }

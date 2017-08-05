@@ -83,23 +83,15 @@ class ProfileController extends Controller
      */
     public function updateSettings(ProfileRequest $request, User $user)
     {
-//        $task = Task::findOrFail($id);
-//        $this->validate($request, [
-//            'title' => 'required',
-//            'description' => 'required'
-//        ]);
-//        $input = $request->all();
-//        $task->fill($input)->save();
-
-//        $input = $request->all();
-//        $user->fill($input);
-
 
         if($request->file('profilePicture')){
             Storage::put(
                 'public/avatars/'.$user->id,
                 file_get_contents($request->file('profilePicture')->getRealPath())
             );
+
+            $user->picture_url = '/storage/avatars/' . $user->id;
+            $user->save();
         }
 
 
@@ -107,7 +99,6 @@ class ProfileController extends Controller
         $userProfile = $user->profile;
         if($userProfile){
 
-            $userProfile->profile_picture_filename = 'avatar/' . $user->id;
             $userProfile->education = request()->education;
             $userProfile->position = request()->position;
             $userProfile->location = request()->location;
@@ -124,7 +115,6 @@ class ProfileController extends Controller
                 'location' => request()->location,
                 'skills' => request()->skills,
                 'notes' => request()->notes,
-                'profile_picture_filename' => 'avatar/' . $user->id,
             ]);
             $user->profile()->save($userProfile);
         }

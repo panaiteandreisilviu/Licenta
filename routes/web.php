@@ -168,11 +168,16 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     // Get user picture
 
     try {
-        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal');
+        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal',  Session::get('fb_user_access_token'));
     } catch (Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
 
+    $pictureData = $response->getGraphNode()->asArray();
+    $pictureUrl = $pictureData['url'];
+
+    $user->picture_url = $pictureUrl;
+    $user->save;
 
     // Log the user into Laravel
     Auth::login($user);
@@ -298,21 +303,5 @@ Route::get('/facebook/test/insights/page_impressions_by_age_gender_unique', func
     echo '<pre>' . print_r($response,1) . '<pre>';
     echo '<pre>' . print_r('--------------------------------',1) . '<pre>';
     echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
-
-});
-
-Route::get('/picture', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
-{
-
-    try {
-        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal',  Session::get('fb_user_access_token'));
-    } catch (Facebook\Exceptions\FacebookSDKException $e) {
-        dd($e->getMessage());
-    }
-
-
-    echo '<pre>' . print_r($response,1) . '<pre>';
-    echo '<pre>' . print_r('--------------------------------',1) . '<pre>';
-    echo '<pre>' . print_r($response->getGraphNode()->asArray(),1) . '<pre>';
 
 });
