@@ -67,9 +67,12 @@
                         <!-- /.attachment-block -->
 
                         <!-- Social sharing buttons -->
-                        {{--<button type="button" class="btn btn-default btn-xs"><i class="fa fa-share"></i> Share</button>
+                        <button type="button" class="btn btn-primary btn-xs"><i class="fa fa-share"></i> Share</button>
                         <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</button>
-                        <span class="pull-right text-muted">45 likes - 2 comments</span>--}}
+                        @if($post->facebook_post_id)
+                            <a href="www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-default btn-xs">View on Facebook</a>
+                        @endif
+                        <span class="pull-right text-muted">45 likes - 2 comments</span>
                     </div>
                     <!-- /.box-body -->
                 {{--<div class="box-footer box-comments">--}}

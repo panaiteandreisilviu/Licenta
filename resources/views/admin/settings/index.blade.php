@@ -48,8 +48,9 @@
                                         <td>{{$account['name']}}</td>
                                         <td>{{$account['category']}}</td>
                                         <td>
-                                            <a href="/facebook/set_facebook_token/{{$account['id']}}" class="btn btn-primary btn-xs">
-                                                <i class="fa fa-edit"></i> Get Token
+                                            <a href="/facebook/retrievePageAccessToken/{{$account['id']}}" class="btn btn-primary btn-xs retrievePageAccessToken"
+                                               data-fb_page_app_id="{{$account['id]}}" data-token="{{$account['access_token']}}">
+                                                <i class="fa fa-edit"></i> Get token
                                             </a>
                                         </td>
                                     </tr>
@@ -132,6 +133,19 @@
 //            "info": true,
 //            "autoWidth": false
             });
+
+            $('.retrievePageAccessToken').on('click', function(){
+
+                axios.post('/facebook/role_permission?role_id=' + this.role_id + '&permission_id=' + this.permission_id, {
+                    'enabled': this.enabled
+                })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            })
         })
     </script>
     
