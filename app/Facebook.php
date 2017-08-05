@@ -24,11 +24,13 @@ class Facebook extends Model
             dd($e->getMessage());
         }
 
+        $accounts = array();
         $accountsEdge = $response->getGraphEdge();
 
-        foreach ($accountsEdge as $account) {
-            echo '<pre>' . print_r($account->asArray(),1) . '<pre>';
+        foreach ($accountsEdge as $accountNode) {
+            $accounts[$accountNode->getField('id')] = $accountNode->asArray();
         }
-        return $accountsEdge;
+        return $accounts;
+
     }
 }
