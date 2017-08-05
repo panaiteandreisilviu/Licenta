@@ -125,8 +125,8 @@
     <script>
         $(function(){
             $('#dataTable').DataTable({
-            "paging": true,
-                "searching": false,
+            "paging": false,
+            "searching": false,
 //            "lengthChange": false,
 //            "ordering": true,
 //            "info": true,
