@@ -305,7 +305,7 @@ Route::get('/picture', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb
 {
 
     try {
-        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal');
+        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal',  Session::get('fb_user_access_token'));
     } catch (Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
