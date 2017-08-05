@@ -47,11 +47,11 @@
                                         <td>{{$account['id']}}</td>
                                         <td>{{$account['name']}}</td>
                                         <td>{{$account['category']}}</td>
-    {{--                                    <td>
-                                            <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-primary btn-xs">
-                                                <i class="fa fa-edit"></i> Edit
+                                        <td>
+                                            <a href="/facebook/set_facebook_token/{{$account['id']}}" class="btn btn-primary btn-xs">
+                                                <i class="fa fa-edit"></i> Get Token
                                             </a>
-                                        </td>--}}
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

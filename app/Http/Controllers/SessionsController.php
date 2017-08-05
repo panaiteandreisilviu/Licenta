@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class SessionsController extends Controller
 {
@@ -36,6 +37,9 @@ class SessionsController extends Controller
     public function destroy()
     {
         auth()->logout();
+
+        Session::forget('fb_page_app_id');
+        Session::forget('fb_page_access_token');
 
         return redirect()->route("login");
     }
