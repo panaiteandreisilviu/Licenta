@@ -14,7 +14,7 @@ class SessionsController extends Controller
     public function create()
     {
         $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-        $facebook_login_url = $fb->getLoginUrl(['email', 'manage_pages', 'publish_pages', 'read_insights']); // se poate seta si in config
+        $facebook_login_url = $fb->getLoginUrl(['email','user_about_me', 'user_birthday', 'user_hometown', 'user_status','manage_pages', 'publish_pages', 'read_insights']); // se poate seta si in config
 
         return view('frontpage.sessions.create', compact('facebook_login_url'));
     }
