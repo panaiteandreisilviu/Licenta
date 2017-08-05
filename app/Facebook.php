@@ -25,17 +25,10 @@ class Facebook extends Model
         }
 
         $accountsEdge = $response->getGraphEdge();
-        /*foreach ($response->getGraphEdge() as $node) {
-            echo '<pre>' . print_r($node->getField('id'), 1) . '<pre>';
-            echo '<pre>' . print_r($node->getField('name'), 1) . '<pre>';
-            echo '<pre>' . print_r($node->getField('access_token'), 1) . '<pre>';
 
-            Session::put('fb_page_app_id', $node->getField('id'));
-            Session::put('fb_page_access_token', $node->getField('access_token'));
-        }*/
-
-        dd($accountsEdge);
-
+        foreach ($accountsEdge as $account) {
+            echo '<pre>' . print_r($account->asArray(),1) . '<pre>';
+        }
         return $accountsEdge;
     }
 }
