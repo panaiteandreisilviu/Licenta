@@ -15,8 +15,6 @@ class FacebookController extends Controller
         Session::put('fb_page_app_id', $fb_page_app_id);
         Session::put('fb_page_access_token', $fb_page_access_token);
 
-        return response()->json([
-            'success' => 'Page token was retrieved successfully',
-        ]);
+        Session::flash('success_message', 'Page token was retrieved successfully!');
     }
 }
