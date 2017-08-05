@@ -13,6 +13,62 @@
 
             <div class="col-sm-6 col-xs-12">
 
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Facebook</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="FACEBOOK_APP_ID">App ID</label>
+                            <input class="form-control" id="FACEBOOK_APP_ID" name="FACEBOOK_APP_ID" placeholder="App ID" type="text" value="{{$settings ? $settings->FACEBOOK_APP_ID : ''}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="FACEBOOK_APP_SECRET">App Secret</label>
+                            <input class="form-control" id="FACEBOOK_APP_SECRET" name="FACEBOOK_APP_SECRET" placeholder="App Secret" type="text" value="{{$settings ? $settings->FACEBOOK_APP_SECRET : ''}}">
+                        </div>
+
+                        <h3>Facebook Apps</h3>
+                        <table id="dataTable" class="table table-bordered table-hover">
+
+                            <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th style="max-width:110px">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($accounts as $account)
+                                <tr>
+                                    <td>{{$account->id}}</td>
+                                    <td>{{$account->name}}</td>
+                                    <td>{{$account->category}}</td>
+{{--                                    <td>
+                                        <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-primary btn-xs">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                    </td>--}}
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            <tr>
+
+                            </tr>
+                            </tfoot>
+                        </table>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6 col-xs-12">
+
                 <div class="box box-info">
                     <div class="box-header with-border">
                         <h3 class="box-title">Twitter</h3>
@@ -47,33 +103,6 @@
 
             </div>
 
-            <div class="col-sm-6 col-xs-12">
-
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Facebook</h3>
-                    </div>
-
-                    <div class="box-body">
-                        <div class="form-group">
-                            <label for="FACEBOOK_APP_ID">App ID</label>
-                            <input class="form-control" id="FACEBOOK_APP_ID" name="FACEBOOK_APP_ID" placeholder="App ID" type="text" value="{{$settings ? $settings->FACEBOOK_APP_ID : ''}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="FACEBOOK_APP_SECRET">App Secret</label>
-                            <input class="form-control" id="FACEBOOK_APP_SECRET" name="FACEBOOK_APP_SECRET" placeholder="App Secret" type="text" value="{{$settings ? $settings->FACEBOOK_APP_SECRET : ''}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="FACEBOOK_ACCESS_TOKEN">Access token</label>
-                            <textarea class="form-control" id="FACEBOOK_ACCESS_TOKEN" name="FACEBOOK_ACCESS_TOKEN" placeholder="Access token" rows="4">{{$settings ? $settings->FACEBOOK_ACCESS_TOKEN : ''}}</textarea>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
             <div class="col-xs-12">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-mail-forward"></i> Submit
@@ -85,5 +114,17 @@
 
     </div>
 
-    <!-- /.box -->
+    <script>
+        $(function(){
+            $('#dataTable').DataTable({
+//            "paging": true,
+//            "lengthChange": false,
+//            "searching": false,
+//            "ordering": true,
+//            "info": true,
+//            "autoWidth": false
+            });
+        })
+    </script>
+    
 @endsection

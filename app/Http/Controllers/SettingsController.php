@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facebook;
 use App\Settings;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class SettingsController extends Controller
     public function index()
     {
         $settings = Settings::all()->first();
-        return view('admin.settings.index', compact('settings'));
+        $user_accounts = Facebook::getUserPageAccounts();
+        return view('admin.settings.index', compact('settings', 'user_accounts'));
     }
 
     /**
