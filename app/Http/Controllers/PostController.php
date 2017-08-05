@@ -126,8 +126,10 @@ class PostController extends Controller
 
         // ------------------ ATTACH TAGS ------------------
 
-        foreach (request('tags') as $tag_id) {
-            $post->tags()->attach($tag_id);
+        if(count(request('tags'))){
+            foreach (request('tags') as $tag_id) {
+                $post->tags()->attach($tag_id);
+            }
         }
 
         $request->session()->flash('success_message', 'Post successfully saved!');
