@@ -18,8 +18,6 @@ class SettingsController extends Controller
         $settings = Settings::all()->first();
         $user_accounts = Facebook::getUserPageAccounts();
 
-        dd($user_accounts);
-
         return view('admin.settings.index', compact('settings', 'user_accounts'));
     }
 

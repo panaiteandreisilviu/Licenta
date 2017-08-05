@@ -29,37 +29,45 @@
                             <input class="form-control" id="FACEBOOK_APP_SECRET" name="FACEBOOK_APP_SECRET" placeholder="App Secret" type="text" value="{{$settings ? $settings->FACEBOOK_APP_SECRET : ''}}">
                         </div>
 
-                        <h3>Facebook Apps</h3>
-                        <table id="dataTable" class="table table-bordered table-hover">
+                        @if(count($user_accounts))
+                            <h3>Facebook Apps</h3>
+                            <table id="dataTable" class="table table-bordered table-hover">
 
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Category</th>
-                                <th style="max-width:110px">Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($accounts as $account)
+                                <thead>
                                 <tr>
-                                    <td>{{$account->id}}</td>
-                                    <td>{{$account->name}}</td>
-                                    <td>{{$account->category}}</td>
-{{--                                    <td>
-                                        <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-primary btn-xs">
-                                            <i class="fa fa-edit"></i> Edit
-                                        </a>
-                                    </td>--}}
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th style="max-width:110px">Actions</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                            <tfoot>
-                            <tr>
+                                </thead>
+                                <tbody>
+                                @foreach($user_accounts as $account)
+                                    <tr>
+                                        <td>{{$account['id']}}</td>
+                                        <td>{{$account['name']}}</td>
+                                        <td>{{$account['category']}}</td>
+    {{--                                    <td>
+                                            <a href="/admin/posts/{{$post->id}}/edit" class="btn btn-primary btn-xs">
+                                                <i class="fa fa-edit"></i> Edit
+                                            </a>
+                                        </td>--}}
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                <tr>
 
-                            </tr>
-                            </tfoot>
-                        </table>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        @else
+                            <div class="col-xs-12">
+                                <span class="alert alert-warning">
+                                    Login to facebook to view available apps.
+                                </span>
+                            </div>
+                        @endif
 
 
                     </div>
