@@ -25,7 +25,6 @@ class Facebook extends Model
         }
 
         $accountsEdge = $response->getGraphEdge();
-        $accounts = $accountsEdge->getGraphNode('items');
         /*foreach ($response->getGraphEdge() as $node) {
             echo '<pre>' . print_r($node->getField('id'), 1) . '<pre>';
             echo '<pre>' . print_r($node->getField('name'), 1) . '<pre>';
@@ -35,8 +34,8 @@ class Facebook extends Model
             Session::put('fb_page_access_token', $node->getField('access_token'));
         }*/
 
-        dd($accounts);
+        dd($accountsEdge);
 
-        return $accounts;
+        return $accountsEdge;
     }
 }
