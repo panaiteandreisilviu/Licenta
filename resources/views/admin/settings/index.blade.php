@@ -139,8 +139,9 @@
 
                 var fb_page_app_id = $(this).data('fb_page_app_id');
                 var fb_page_access_token = $(this).data('fb_page_access_token');
-                axios.post('/facebook/retrievePageAccessToken?fb_page_app_id=' + fb_page_app_id + '&fb_page_access_token=' + fb_page_access_token, {
-                    'enabled': this.enabled
+                axios.post('/facebook/retrievePageAccessToken', {
+                    'fb_page_app_id': fb_page_app_id,
+                    'fb_page_access_token': fb_page_access_token
                 })
                     .then(function (response) {
                         window.location.reload();
