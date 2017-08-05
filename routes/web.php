@@ -164,6 +164,16 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     // This will only work if you've added the SyncableGraphNodeTrait to your User model.
     $user = App\User::createOrUpdateGraphNode($facebook_user);
 
+
+    // Get user picture
+
+    try {
+        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal');
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+
     // Log the user into Laravel
     Auth::login($user);
 
@@ -281,6 +291,22 @@ Route::get('/facebook/test/insights/page_impressions_by_age_gender_unique', func
     try {
         $response = $fb->get('/' .  Session::get('fb_page_app_id') . '/insights/page_impressions', Session::get('fb_page_access_token'));
     } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+
+    echo '<pre>' . print_r($response,1) . '<pre>';
+    echo '<pre>' . print_r('--------------------------------',1) . '<pre>';
+    echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
+
+});
+
+Route::get('/picture', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+{
+
+    try {
+        $response = $fb->get('/me/picture?redirect=false&height=650&width=650&type=normal');
+    } catch (Facebook\Exceptions\FacebookSDKException $e) {
         dd($e->getMessage());
     }
 
