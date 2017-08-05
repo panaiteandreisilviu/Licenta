@@ -6,7 +6,7 @@
         <div class="col-xs-12">
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-light-blue-gradient" style="background: url('../dist/img/photo1.png') center center;">
+                <div class="widget-user-header bg-light-blue-gradient" style="background: url('{{$user->cover_url}}') center center;">
                     <h3 class="widget-user-username">{{$user->name}}</h3>
                     <h5 class="widget-user-desc">{{$user->profile ? $user->profile->position: ''}}</h5>
                 </div>

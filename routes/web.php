@@ -188,13 +188,10 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
         dd($e->getMessage());
     }
 
-    echo '<pre>' . print_r($response,1) . '<pre>';
+    $coverData = $response->getGraphNode()->asArray();
+    $coverUrl = $coverData['cover']['source'];
 
-    echo '<pre>' . print_r($response->getGraphNode()->asArray(),1) . '<pre>';
-
-    die();
-
-    $user->picture_url = $pictureUrl;
+    $user->cover_url = $coverUrl;
     $user->save();
 
     // Log the user into Laravel
