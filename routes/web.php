@@ -178,7 +178,7 @@ Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFaceb
     $pictureUrl = $pictureData['url'];
 
     $user->picture_url = $pictureUrl;
-    $user->save;
+    $user->save();
 
     // Log the user into Laravel
     Auth::login($user);
