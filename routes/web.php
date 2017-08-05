@@ -98,7 +98,7 @@ Route::get('/logout', 'SessionsController@destroy');
 
 // ----------------- FACEBOOK LOGIN -----------------------
 
-Route::get('/facebook/retrievePageAccessToken', 'FacebookController@retrievePageAccessToken');
+Route::post('/facebook/retrievePageAccessToken', 'FacebookController@retrievePageAccessToken');
 
 Route::get('/facebook/callback', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
