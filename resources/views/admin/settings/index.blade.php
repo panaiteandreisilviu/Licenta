@@ -49,7 +49,7 @@
                                         <td>{{$account['category']}}</td>
                                         <td>
                                             <a href="/facebook/retrievePageAccessToken/{{$account['id']}}" class="btn btn-primary btn-xs retrievePageAccessToken"
-                                               data-fb_page_app_id="{{$account['id]}}" data-token="{{$account['access_token']}}">
+                                               data-fb_page_app_id="{{$account['id']}}" data-fb_page_access_token="{{$account['access_token']}}">
                                                 <i class="fa fa-edit"></i> Get token
                                             </a>
                                         </td>
@@ -136,11 +136,11 @@
 
             $('.retrievePageAccessToken').on('click', function(){
 
-                axios.post('/facebook/role_permission?role_id=' + this.role_id + '&permission_id=' + this.permission_id, {
+                axios.post('/facebook/retrievePageAccessToken?fb_page_app_id=' + $(this).data('fb_page_app_id') + '&fb_page_access_token=' + $(this).data('fb_page_access_token'), {
                     'enabled': this.enabled
                 })
                     .then(function (response) {
-                        console.log(response);
+                        window.location.reload();
                     })
                     .catch(function (error) {
                         console.log(error);
