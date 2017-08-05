@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="box-body">
-                        <div class="form-group">
+                        {{--<div class="form-group">
                             <label for="FACEBOOK_APP_ID">App ID</label>
                             <input class="form-control" id="FACEBOOK_APP_ID" name="FACEBOOK_APP_ID" placeholder="App ID" type="text" value="{{$settings ? $settings->FACEBOOK_APP_ID : ''}}">
                         </div>
@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label for="FACEBOOK_APP_SECRET">App Secret</label>
                             <input class="form-control" id="FACEBOOK_APP_SECRET" name="FACEBOOK_APP_SECRET" placeholder="App Secret" type="text" value="{{$settings ? $settings->FACEBOOK_APP_SECRET : ''}}">
-                        </div>
+                        </div>--}}
 
                         @if(count($user_accounts))
                             <h3>Facebook Apps</h3>
@@ -62,14 +62,14 @@
                                 </tfoot>
                             </table>
                         @else
-                            <div class="col-xs-12">
-                                <span class="alert alert-warning">
-                                    Login to facebook to view available apps.
-                                </span>
+                            <div class="form-group">
+                                <div class="alert alert-info alert-dismissible" style="background-color: #3C8DBC !important; border:0">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-info"></i> Info</h4>
+                                    Please login with facebook to view available apps.
+                                </div>
                             </div>
                         @endif
-
-
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@
             </div>
 
             <div class="col-xs-12">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary pull-right">
                     <i class="fa fa-mail-forward"></i> Submit
                 </button>
             </div>
@@ -125,8 +125,8 @@
     <script>
         $(function(){
             $('#dataTable').DataTable({
-            "paging": false,
-            "searching": false,
+//            "paging": false,
+//            "searching": false,
 //            "lengthChange": false,
 //            "ordering": true,
 //            "info": true,
