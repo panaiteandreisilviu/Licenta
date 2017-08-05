@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Notifications\PostPublished;
 use Illuminate\Support\Facades\Storage;
-use Mockery\Exception;
 
 class PostController extends Controller
 {
@@ -122,7 +121,7 @@ class PostController extends Controller
         if(request('published_facebook') ){
             try{
                 $post->publishFacebook();
-            } catch(Exception $e){
+            } catch(\Exception $e){
                 $request->session()->flash('warning_message', 'Facebook: ' . $e->getMessage());
             }
         }
