@@ -313,6 +313,6 @@ Route::get('/picture', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb
 
     echo '<pre>' . print_r($response,1) . '<pre>';
     echo '<pre>' . print_r('--------------------------------',1) . '<pre>';
-    echo '<pre>' . print_r($response->getGraphEdge(),1) . '<pre>';
+    echo '<pre>' . print_r($response->getGraphNode()->asArray(),1) . '<pre>';
 
 });
