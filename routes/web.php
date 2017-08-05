@@ -224,11 +224,11 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
 
     $post_id = $response->getGraphNode()->getField('id');
 
-    try {
-        $response = $fb->post('/' . $post_id, ['message' => 'Test post from sdk 2.... '] , Session::get('fb_page_access_token'));
-    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-        dd($e->getMessage());
-    }
+//    try {
+//        $response = $fb->post('/' . $post_id, ['message' => 'Test post from sdk 2.... '] , Session::get('fb_page_access_token'));
+//    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+//        dd($e->getMessage());
+//    }
 
 
     // ---------------- Add image to post ----------------

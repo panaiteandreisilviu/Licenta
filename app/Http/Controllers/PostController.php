@@ -80,7 +80,7 @@ class PostController extends Controller
             'image' => 'image|mimes:jpeg,png,bmp'
         ]);
 
-
+        // ------------------ STORE POST IMAGE ------------------
         $imageHashName = "";
         if(request('image')) {
             $imageHashName = request()->file('image')->hashName();
@@ -90,13 +90,7 @@ class PostController extends Controller
             );
         }
 
-        if(request('published_twitter')){
-            //$post->notify(new PostPublished($post));
-        }
-
-        if(request('published_facebook') ){
-            //$post->notify(new PostPublished($post));
-        }
+        // ------------------ SAVE POST ------------------
 
         if(request('published')){
             $published_at = new Carbon();
@@ -117,6 +111,20 @@ class PostController extends Controller
         ]);
 
         $post = Post::orderBy('created_at', 'desc')->first();
+
+        // ------------------ PUBLISH POST FACEBOOK TWITTER ------------------
+
+        if(request('published_twitter')){
+            //$post->notify(new PostPublished($post));
+        }
+
+        if(request('published_facebook') ){
+            $post->publishFacebook();
+        }
+
+
+
+        // ------------------ ATTACH TAGS ------------------
 
         foreach (request('tags') as $tag_id) {
             $post->tags()->attach($tag_id);

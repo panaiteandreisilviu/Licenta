@@ -5,6 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\App;
 
 class Post extends Model
 {
@@ -66,6 +67,34 @@ class Post extends Model
         } else {
             return null;
         }
+    }
+
+    /**
+     * Post to Facebook
+     * @return bool
+     */
+    public function publishFacebook(){
+
+        $page_access_token = Session::get('page_access_token');
+        if(!$page_access_token) {
+            return false;
+        }
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/feed', ['message' => $this->body] , $page_access_token);
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $facebook_post_id = $response->getGraphNode()->getField('id');
+        $this->facebook_post_id = $facebook_post_id;
+
+        $this->save();
+
+        return true;
+
     }
 
 }
