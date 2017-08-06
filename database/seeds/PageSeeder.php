@@ -133,6 +133,8 @@ class PageSeeder extends Seeder
         $page->user_id = '1';
         $page->save();
 
+        // ---------------------
+
         Menu::truncate();
         foreach (Page::all() as $page) {
             $menu = new Menu();
