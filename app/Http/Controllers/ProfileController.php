@@ -84,13 +84,23 @@ class ProfileController extends Controller
     public function updateProfileSettings(ProfileRequest $request, User $user)
     {
 
-        if($request->file('profilePicture')){
+        if($request->file('profile_picture')){
             Storage::put(
                 'public/avatars/'.$user->id,
-                file_get_contents($request->file('profilePicture')->getRealPath())
+                file_get_contents($request->file('profile_picture')->getRealPath())
             );
 
             $user->picture_url = '/storage/avatars/' . $user->id;
+            $user->save();
+        }
+
+        if($request->file('profile_cover')){
+            Storage::put(
+                'public/covers/'.$user->id,
+                file_get_contents($request->file('profile_cover')->getRealPath())
+            );
+
+            $user->cover_url = '/storage/covers/' . $user->id;
             $user->save();
         }
 
@@ -99,26 +109,31 @@ class ProfileController extends Controller
         $userProfile = $user->profile;
         if($userProfile){
 
-            $userProfile->education = request()->education;
             $userProfile->position = request()->position;
-            $userProfile->location = request()->location;
-            $userProfile->skills = request()->skills;
-            $userProfile->notes = request()->notes;
+            $userProfile->department = request()->department;
+            $userProfile->studies = request()->studies;
+            $userProfile->address = request()->address;
+            $userProfile->birthplace = request()->birthplace;
+            $userProfile->phone = request()->phone;
+            $userProfile->website = request()->website;
             $user->profile()->save($userProfile);
 
         } else {
 
             $userProfile = new UserProfile([
                 'user_id' => $user->id,
-                'education' => request()->education,
                 'position' => request()->position,
-                'location' => request()->location,
-                'skills' => request()->skills,
-                'notes' => request()->notes,
+                'department' => request()->department,
+                'studies' => request()->studies,
+                'address' => request()->address,
+                'birthplace' => request()->birthplace,
+                'phone' => request()->phone,
+                'website' => request()->website,
             ]);
             $user->profile()->save($userProfile);
         }
 
+        $request->session()->flash('success_message', 'Profile successfully saved!');
 
         return back();
     }

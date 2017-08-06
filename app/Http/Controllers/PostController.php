@@ -138,7 +138,7 @@ class PostController extends Controller
 
         $request->session()->flash('success_message', 'Post successfully saved!');
 
-        return back();
+        return redirect('/admin/posts');
     }
 
     /**
@@ -221,7 +221,7 @@ class PostController extends Controller
 
         $request->session()->flash('success_message', 'Post successfully saved!');
 
-        return back();
+        return redirect('/admin/posts');
     }
 
     /**

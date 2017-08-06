@@ -215,6 +215,28 @@
         @include('layouts.admin.title-breadcrumb', ['title' => isset($title) ? $title : null, 'subtitle' => isset($subtitle) ? $subtitle : null, 'breadcrumbs' => \App\Breadcrumbs::get(Request::path())])
             <!-- Main content -->
             <section class="content">
+
+                <div class="row">
+                    <div class="col-xs-12">
+                        @if(Session::has('success_message'))
+                            <div class="alert alert-success">
+                                {{ Session::get('success_message') }}
+                            </div>
+
+                        @elseif(Session::has('warning_message'))
+                            <div class="alert alert-warning">
+                                {{ Session::get('warning_message') }}
+                            </div>
+
+                        @elseif(Session::has('error_message'))
+                            <div class="alert alert-danger">
+                                {{ Session::get('error_message') }}
+                            </div>
+
+                        @endif
+                    </div>
+                </div>
+
                 @yield('content')
             </section>
             <!-- /.content -->

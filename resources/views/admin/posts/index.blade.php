@@ -33,12 +33,26 @@
                                 <td>
                                     @if($post->published == 1)
                                         <span class="label label-success">
-                                            <i class="fa fa-check"></i> Yes
+                                            <i class="fa fa-globe"></i>
                                         </span>
-                                    @else
-                                        <span class="label label-default">
+                                    @endif
+
+                                    @if($post->published_facebook == 1)
+                                        <span class="label label-primary">
+                                            &nbsp; <i class="fa fa-facebook"></i>
+                                        </span>
+                                    @endif
+                                    @if($post->published_twitter == 1)
+                                        <span class="label label-info">
+                                            <i class="fa fa-twitter"></i>
+                                        </span>
+                                    @endif
+
+                                    @if($post->published != 1 && $post->published_facebook != 1 && $post->published_twitter != 1)
+                                        -
+                                            {{--<span class="label label-default">
                                             <i class="fa fa-times"></i> No
-                                        </span>
+                                        </span>--}}
                                     @endif
                                 </td>
                                 <td>{{$post->published_at ? $post->published_at : ' - '}}</td>

@@ -67,6 +67,8 @@ class PageController extends Controller
                 $menu->save();
             }
         }
+
+        return redirect('/admin/pages');
     }
 
     /**

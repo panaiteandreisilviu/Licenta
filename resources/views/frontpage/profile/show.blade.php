@@ -6,18 +6,21 @@
         <div class="col-xs-12">
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-light-blue-gradient" {{--style="background-image: url({{$user->cover_url}}'')"--}}>
+                <div class="widget-user-header bg-light-blue-gradient" style="position: relative; overflow:hidden; height:150px;">
                     <h3 class="widget-user-username">{{$user->name}}</h3>
                     <h5 class="widget-user-desc">{{$user->profile ? $user->profile->position: ''}}</h5>
+
+                    <img src="{{$user->cover_url}}" onerror="" style="position:absolute; width:100%; top:-50%; left:0">
+
                 </div>
                 <div class="widget-user-image">
-                    <img class="img-circle" src="{{$user->picture_url}}" onerror="this.src='/storage/avatars/default'" style="height:90px; width:90px;" alt="User Avatar">
+                    <img class="img-circle" src="{{$user->picture_url}}" onerror="this.src='/storage/avatars/default'" style="height:90px; width:90px; margin-top:38px;" alt="User Avatar">
                 </div>
                 <div class="box-footer">
                     <div class="row">
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
-                                <h5 class="description-header">3,200</h5>
+                                <h5 class="description-header">{{ $user->profile ? $user->profile->position: ' - ' }}</h5>
                                 <span class="description-text">Position</span>
                             </div>
                             <!-- /.description-block -->
@@ -25,7 +28,7 @@
                         <!-- /.col -->
                         <div class="col-sm-4 border-right">
                             <div class="description-block">
-                                <h5 class="description-header">13,000</h5>
+                                <h5 class="description-header">{{ $user->profile ? $user->profile->department: ' - ' }}</h5>
                                 <span class="description-text">Department </span>
                             </div>
                             <!-- /.description-block -->
@@ -33,7 +36,7 @@
                         <!-- /.col -->
                         <div class="col-sm-4">
                             <div class="description-block">
-                                <h5 class="description-header">35</h5>
+                                <h5 class="description-header">{{ $user->email ? $user->email : ' - '}}</h5>
                                 <span class="description-text">Email</span>
                             </div>
                             <!-- /.description-block -->
@@ -45,7 +48,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <div class="box box-primary">
                 <div class="box-body box-profile">
 
@@ -53,15 +56,15 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <i class="fa fa-user"></i> Full name <a class="pull-right">---</a>
+                            <i class="fa fa-user"></i> Full name <a class="pull-right">{{ $user->name }}</a>
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-sitemap"></i> Position <a class="pull-right">---</a>
+                            <i class="fa fa-sitemap"></i> Position <a class="pull-right"> {{ $user->profile ? $user->profile->position: ' - ' }}</a>
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-building-o"> </i> Department <a class="pull-right">---</a>
+                            <i class="fa fa-building-o"> </i> Department <a class="pull-right"> {{ $user->profile ? $user->profile->department: ' - ' }}</a>
                         </li>
 
                     </ul>
@@ -70,7 +73,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <div class="box box-primary">
                 <div class="box-body box-profile">
 
@@ -78,15 +81,15 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <i class="fa fa-university"></i> Went to <a class="pull-right">1,322</a>
+                            <i class="fa fa-university"></i> Went to <a class="pull-right"> {{ $user->profile ? $user->profile->studies: ' - ' }} </a>
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-home"></i> Lives in <a class="pull-right">1,322</a>
+                            <i class="fa fa-home"></i> Lives in <a class="pull-right"> {{ $user->profile ? $user->profile->address: ' - ' }} </a>
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-map-marker"></i> From <a class="pull-right">1,322</a>
+                            <i class="fa fa-map-marker"></i> From <a class="pull-right"> {{ $user->profile ? $user->profile->birthplace: ' - ' }} </a>
                         </li>
 
 
@@ -96,7 +99,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <div class="box box-info">
                 <div class="box-body box-profile">
 
@@ -112,7 +115,7 @@
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-calendar"> </i> Joined <a class="pull-right">---</a>
+                            <i class="fa fa-calendar"> </i> Joined <a class="pull-right"> {{ \Carbon\Carbon::parse($user->created_at)->format('d.m.Y') }} </a>
                         </li>
 
                     </ul>
@@ -121,7 +124,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-12">
             <div class="box box-info">
                 <div class="box-body box-profile">
 
@@ -129,20 +132,20 @@
 
                     <ul class="list-group list-group-unbordered">
                         <li class="list-group-item">
-                            <i class="fa fa-envelope-o"></i> Email <a class="pull-right">1,322</a>
+                            <i class="fa fa-envelope-o"></i> Email <a class="pull-right">{{ $user->email ? $user->email : ' - ' }}</a>
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-phone"></i> Phone <a class="pull-right">1,322</a>
+                            <i class="fa fa-phone"></i> Phone <a class="pull-right"> {{ $user->profile ? $user->profile->phone: ' - ' }} </a>
                         </li>
 
                         <li class="list-group-item">
-                            <i class="fa fa-globe"></i> Website <a class="pull-right">1,322</a>
+                            <i class="fa fa-globe"></i> Website <a class="pull-right"> {{ $user->profile ? $user->profile->website : ' - ' }} </a>
                         </li>
 
                     </ul>
                 </div>
-                <!-- /.box-body -->
+
             </div>
         </div>
 
