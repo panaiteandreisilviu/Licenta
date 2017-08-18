@@ -19,7 +19,7 @@
         methods: {
             'toggleState': function(){
 
-                axios.post('/admin/role_permission?fb_page_app_id=' + $(this).data('fb_page_app_id') + '&fb_page_access_token=' + $(this).data('fb_page_access_token'), {
+                axios.post('/admin/role_permission?role_id=' + this.role_id + '&permission_id=' + this.permission_id, {
                     'enabled': this.enabled
                 })
                 .then(function (response) {
