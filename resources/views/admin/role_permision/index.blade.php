@@ -1,4 +1,4 @@
-@extends('layouts.admin.default')
+@extends('layouts.admin.default', ['title' => 'Edit role permissions', 'subtitle' => ''])
 @section('content')
 
     <div class="row">
@@ -54,13 +54,15 @@
     <script src="{{ URL::asset('AdminLTE-2.3.11/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
     <script>
-        $('#usersTable').DataTable({
+        $(function(){
+            $('#usersTable').DataTable({
 //            "paging": true,
 //            "lengthChange": false,
 //            "searching": false,
 //            "ordering": true,
 //            "info": true,
 //            "autoWidth": false
+            });
         });
     </script>
 

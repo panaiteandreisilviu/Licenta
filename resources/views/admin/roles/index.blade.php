@@ -60,13 +60,15 @@
     <script src="{{ URL::asset('AdminLTE-2.3.11/plugins/datatables/dataTables.bootstrap.min.js') }}"></script>
 
     <script>
-        $('#usersTable').DataTable({
+        $(function(){
+            $('#usersTable').DataTable({
 //            "paging": true,
 //            "lengthChange": false,
 //            "searching": false,
 //            "ordering": true,
 //            "info": true,
 //            "autoWidth": false
+            });
         });
     </script>
 

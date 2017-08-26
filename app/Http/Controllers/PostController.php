@@ -45,7 +45,8 @@ class PostController extends Controller
             $posts = $tag->posts;
         }
 
-        return view('frontpage.posts.index', compact('posts'));
+        $publishedPostCount = Post::all()->where('published', '=', '1')->count();
+        return view('frontpage.posts.index', compact('posts', 'publishedPostCount'));
     }
 
     public function indexAdmin() {

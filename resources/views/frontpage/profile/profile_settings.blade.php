@@ -77,10 +77,9 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-3 control-label">Name</label>
                             <div class="col-sm-8">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{$user->name}}">
+                                <input type="text" class="form-control" id="name" readonly placeholder="Name" value="{{$user->name}}">
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <label for="position" class="col-sm-3 control-label">Position</label>

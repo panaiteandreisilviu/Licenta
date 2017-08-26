@@ -94,7 +94,7 @@ class TagController extends Controller
 
         $request->session()->flash('success_message', 'Tag successfully saved!');
 
-        return back();
+        return redirect('admin/tags');
     }
 
     /**

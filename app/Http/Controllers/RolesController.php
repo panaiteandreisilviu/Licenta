@@ -51,7 +51,7 @@ class RolesController extends Controller
 
         $request->session()->flash('success_message', 'Role successfully saved!');
 
-        return redirect('admin/roles');
+        return redirect('/admin/roles');
     }
 
     /**
@@ -96,7 +96,7 @@ class RolesController extends Controller
 
         $request->session()->flash('success_message', 'Role successfully saved!');
 
-        return back();
+        return redirect('/admin/roles');
 
     }
 

@@ -138,6 +138,43 @@ class ProfileController extends Controller
         return back();
     }
 
+    public function accountSettings(User $user)
+    {
+        return view('frontpage.profile.account_settings', compact('user'));
+    }
+
+    public function accountSettingsChangePassword(User $user)
+    {
+        $this->validate(request(), [
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user->password = bcrypt(request('password'));
+
+        $user->save();
+
+        request()->session()->flash('success_message', 'Password changed successfully');
+        return back();
+
+    }
+
+    public function accountSettingsChangeDetails(User $user)
+    {
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $user->name = request('name');
+        $user->email = request('email');
+
+        $user->save();
+
+        request()->session()->flash('success_message', 'Account details changed successfully');
+        return back();
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *

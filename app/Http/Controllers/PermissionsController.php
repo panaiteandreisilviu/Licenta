@@ -98,8 +98,7 @@ class PermissionsController extends Controller
 
         $request->session()->flash('success_message', 'Permission successfully saved!');
 
-        return back();
-
+        return redirect('admin/permissions');
     }
 
     /**

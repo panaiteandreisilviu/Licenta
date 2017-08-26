@@ -27,8 +27,12 @@ class AppServiceProvider extends ServiceProvider
 
             // Tags
             $tags = \App\Tag::all();
+            $tagsCount = 0;
+            foreach ($tags as $tagsByPost) {
+                $tagsCount += $tagsByPost->posts->count();
+            }
 
-            $view->with(compact('archives', 'userArchives', 'postCount', 'tags'));
+            $view->with(compact('archives', 'userArchives', 'postCount', 'tags', 'tagsCount'));
         });
     }
 

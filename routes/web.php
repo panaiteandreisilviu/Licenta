@@ -27,8 +27,9 @@ Route::get('/profile/{user}', "ProfileController@show");
 Route::get('/profile/settings/{user}', "ProfileController@profileSettings");
 Route::post('/profile/settings/{user}', "ProfileController@updateProfileSettings");
 
-Route::get('/profile/account/{user}', "ProfileController@account");
-
+Route::get('/profile/account/{user}', "ProfileController@accountSettings");
+Route::post('/profile/account_change_password/{user}', "ProfileController@accountSettingsChangePassword");
+Route::post('/profile/account_change_details/{user}', "ProfileController@accountSettingsChangeDetails");
 
 // ------ PAGES
 

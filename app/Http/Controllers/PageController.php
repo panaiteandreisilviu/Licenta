@@ -118,7 +118,7 @@ class PageController extends Controller
 
         $request->session()->flash('success_message', 'Page successfully saved!');
 
-        return back();
+        return redirect('/admin/pages');
     }
 
     /**
@@ -157,7 +157,6 @@ class PageController extends Controller
             'title' => 'required',
             'content' => 'required',
         ]);
-
 
         $page->slug = request('slug');
         $page->title = request('title');

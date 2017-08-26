@@ -13,7 +13,9 @@ class Post extends Model
 {
     use Notifiable;
 
-    protected $fillable = ['title', 'body', 'user_id', 'image_path', 'published', 'published_at', 'published_twitter', 'published_facebook']; // CE SE POATE SALVA CU POST::create([]);
+    protected $fillable = ['title', 'body', 'user_id', 'image_path', 'published', 'published_at', 'published_twitter', 'published_facebook'];
+
+    // CE SE POATE SALVA CU POST::create([]);
     //protected $guarded = ['id']; // CE NU SE POATE SALVA CU POST::create([]);
 
     public function user(){

@@ -87,8 +87,8 @@ class UsersController extends Controller
         DB::delete('DELETE FROM role_user WHERE user_id = ?',[$user->id]);
         $user->attachRole(Role::find(request('role')));
 
-        $request->session()->flash('success_message', 'Role successfully saved!');
-        return back();
+        $request->session()->flash('success_message', 'User successfully saved!');
+        return redirect('/admin/users');
 
     }
 

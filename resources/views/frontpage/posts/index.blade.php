@@ -16,115 +16,125 @@
     {{--</div>--}}
 
 
-    <div class="col-sm-8 col-xs-12">
-        @foreach($posts as $post)
+        @if($publishedPostCount)
+            <div class="col-sm-8 col-xs-12">
 
-            @if($post->published)
+                @foreach($posts as $post)
 
-                <div class="box box-widget {{--collapsed-box--}}">
-                    <div class="box-header with-border">
-                        <div class="user-block">
+                    @if($post->published)
+                        <div class="box box-widget {{--collapsed-box--}}">
+                            <div class="box-header with-border">
+                                <div class="user-block">
 
-                            <img class="img-circle" src="{{$post->user()->picture_url}}" onerror="this.src='storage/avatars/default'" alt="User Image">
+                                    <img class="img-circle" src="{{$post->user()->picture_url}}" onerror="this.src='storage/avatars/default'" alt="User Image">
 
-                            <span class="username">
-                            <a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a>
+                                    <span class="username">
+                                <a href="/profile/{{$post->user()->id}}">{{$post->user()->name}}</a>
 
-                            <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> -
-                                <a href="/post/{{$post->id}}">
-                                    {{$post->title}}
-                                </a>
+                                <span class="hidden-xs hidden-sm" style="font-size:16px; color:#6e6e6e"> -
+                                    <a href="/post/{{$post->id}}">
+                                        {{$post->title}}
+                                    </a>
+                                </span>
+
                             </span>
 
-                        </span>
+                                    <span class="description">{{$post->published_at ? $post->published_at->diffForHumans() : ''}}</span>
 
-                            <span class="description">{{$post->published_at ? $post->published_at->diffForHumans() : ''}}</span>
+                                </div>
+                                <!-- /.user-block -->
+                                <div class="box-tools">
+                                    {{--<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">--}}
+                                    {{--<i class="fa fa-circle-o"></i></button>--}}
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                    </button>
+                                    {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
+                                </div>
+                                <!-- /.box-tools -->
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <!-- post text -->
+                                <h4 class="hidden-md hidden-lg">
+                                    <a href="/post/{{$post->id}}">
+                                        {{$post->title}}
+                                    </a>
+                                </h4>
+                                {!!$post->body !!}
 
+                                <img src="/storage/post_images/{{$post->image_path}}" onerror="" class="img-responsive pad" alt="">
+
+                                <!-- Attachment -->
+                                <!-- /.attachment-block -->
+
+                                <!-- Social sharing buttons -->
+                                @if($post->facebook_post_id)
+                                    <a href="www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-default btn-xs">View on Facebook</a>
+                                @endif
+                            </div>
+                            <!-- /.box-body -->
+                        {{--<div class="box-footer box-comments">--}}
+                        {{--<div class="box-comment">--}}
+                        {{--<!-- User image -->--}}
+                        {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user3-128x128.jpg" alt="User Image">--}}
+
+                        {{--<div class="comment-text">--}}
+                        {{--<span class="username">--}}
+                        {{--Maria Gonzales--}}
+                        {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
+                        {{--</span><!-- /.username -->--}}
+                        {{--It is a long established fact that a reader will be distracted--}}
+                        {{--by the readable content of a page when looking at its layout.--}}
+                        {{--</div>--}}
+                        {{--<!-- /.comment-text -->--}}
+                        {{--</div>--}}
+                        {{--<!-- /.box-comment -->--}}
+                        {{--<div class="box-comment">--}}
+                        {{--<!-- User image -->--}}
+                        {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user5-128x128.jpg" alt="User Image">--}}
+
+                        {{--<div class="comment-text">--}}
+                        {{--<span class="username">--}}
+                        {{--Nora Havisham--}}
+                        {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
+                        {{--</span><!-- /.username -->--}}
+                        {{--The point of using Lorem Ipsum is that it has a more-or-less--}}
+                        {{--normal distribution of letters, as opposed to using--}}
+                        {{--'Content here, content here', making it look like readable English.--}}
+                        {{--</div>--}}
+                        {{--<!-- /.comment-text -->--}}
+                        {{--</div>--}}
+                        {{--<!-- /.box-comment -->--}}
+                        {{--</div>--}}
+                        <!-- /.box-footer -->
+
+
+                        {{--<div class="box-footer">
+                            <form action="#" method="post">
+                                <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user() ? Auth::user()->id : null}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
+                                <div class="img-push">
+                                    <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                </div>
+                            </form>
+                        </div>--}}
+
+
+                        <!-- /.box-footer -->
                         </div>
-                        <!-- /.user-block -->
-                        <div class="box-tools">
-                            {{--<button type="button" class="btn btn-box-tool" data-toggle="tooltip" title="Mark as read">--}}
-                            {{--<i class="fa fa-circle-o"></i></button>--}}
-                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                            </button>
-                            {{--<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>--}}
-                        </div>
-                        <!-- /.box-tools -->
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body">
-                        <!-- post text -->
-                        <h4 class="hidden-md hidden-lg">
-                            <a href="/post/{{$post->id}}">
-                                {{$post->title}}
-                            </a>
-                        </h4>
-                        {!!$post->body !!}
+                    @endif
 
-                        <img src="/storage/post_images/{{$post->image_path}}" onerror="" class="img-responsive pad" alt="">
+                @endforeach
+            </div>
 
-                        <!-- Attachment -->
-                        <!-- /.attachment-block -->
-
-                        <!-- Social sharing buttons -->
-                        @if($post->facebook_post_id)
-                            <a href="www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-default btn-xs">View on Facebook</a>
-                        @endif
-                    </div>
-                    <!-- /.box-body -->
-                {{--<div class="box-footer box-comments">--}}
-                {{--<div class="box-comment">--}}
-                {{--<!-- User image -->--}}
-                {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user3-128x128.jpg" alt="User Image">--}}
-
-                {{--<div class="comment-text">--}}
-                {{--<span class="username">--}}
-                {{--Maria Gonzales--}}
-                {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
-                {{--</span><!-- /.username -->--}}
-                {{--It is a long established fact that a reader will be distracted--}}
-                {{--by the readable content of a page when looking at its layout.--}}
-                {{--</div>--}}
-                {{--<!-- /.comment-text -->--}}
-                {{--</div>--}}
-                {{--<!-- /.box-comment -->--}}
-                {{--<div class="box-comment">--}}
-                {{--<!-- User image -->--}}
-                {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user5-128x128.jpg" alt="User Image">--}}
-
-                {{--<div class="comment-text">--}}
-                {{--<span class="username">--}}
-                {{--Nora Havisham--}}
-                {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
-                {{--</span><!-- /.username -->--}}
-                {{--The point of using Lorem Ipsum is that it has a more-or-less--}}
-                {{--normal distribution of letters, as opposed to using--}}
-                {{--'Content here, content here', making it look like readable English.--}}
-                {{--</div>--}}
-                {{--<!-- /.comment-text -->--}}
-                {{--</div>--}}
-                {{--<!-- /.box-comment -->--}}
-                {{--</div>--}}
-                <!-- /.box-footer -->
-
-
-                {{--<div class="box-footer">
-                    <form action="#" method="post">
-                        <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user() ? Auth::user()->id : null}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
-                        <div class="img-push">
-                            <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
-                        </div>
-                    </form>
-                </div>--}}
-
-
-                <!-- /.box-footer -->
+        @else
+            <div class="col-xs-12">
+                <div class="alert alert-info alert-dismissible" style="background-color: #efefef !important; border:1px solid #bbbbbb; color:#444 !important;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-info"></i> Info</h4>
+                    No posts have been published yet.
                 </div>
-
-            @endif
-
-        @endforeach
-    </div>
+            </div>
+        @endif
 
     <div class="col-sm-4 hidden-xs">
         @include('layouts.top-nav.post_sidebar')

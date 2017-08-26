@@ -21,12 +21,18 @@
                     <a href="/profile/settings/{{Auth::user()->id}}">Settings</a>
                 </div>
 
-                <div class="col-xs-4 text-center">
-                    <a href="/profile/account/{{Auth::user()->id}}">Account</a>
-                </div>
+                @if(!preg_match( '/admin/', Request::path()))
+                    <div class="col-xs-4 text-center">
+                        @role('admin')
+                        <a href="/admin">CMS</a>
+                        @endrole
+                    </div>
+                @else
+                    <span> - </span>
+                @endif
 
-                <div class="col-xs-4 text-center">
-                    <a href="#">Activity</a>
+                <div class="col-xs-4 text-center pull-right">
+                    <a href="/profile/account/{{Auth::user()->id}}">Account</a>
                 </div>
             </div>
             <!-- /.row -->
@@ -37,18 +43,6 @@
             <div class="pull-left">
                 <a href="/profile/{{Auth::user()->id}}" class="btn btn-default btn-flat">Profile</a>
             </div>
-
-            @if(!preg_match( '/admin/', Request::path()))
-                @role('admin')
-                <div class="pull-left" style="margin-left:2px;">
-                    <a href="/admin" class="btn btn-default btn-flat">Admin console</a>
-                </div>
-                @endrole
-            @else
-                <div class="pull-left" style="margin-left:6px;">
-                    <a href="/" class="btn btn-default btn-flat">Landing page</a>
-                </div>
-            @endif
 
             <div class="pull-right">
                 <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
