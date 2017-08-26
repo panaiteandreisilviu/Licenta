@@ -246,7 +246,6 @@ Route::get('/facebook/test/get_page_token', function(SammyK\LaravelFacebookSdk\L
 
 });
 
-// Endpoint that is redirected to after an authentication attempt
 Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
 {
     try {
@@ -270,6 +269,40 @@ Route::get('/facebook/test/post_to_page', function(SammyK\LaravelFacebookSdk\Lar
 
 
     // ---------------- Add image to post ----------------
+
+});
+
+
+Route::get('/facebook/test/post_to_page_with_image', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+{
+
+    try {
+        $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/photos', ['caption' => 'Test post from sdk 3.... ', 'url' => 'https://c1.staticflickr.com/1/85/209708058_b5a5fb07a6_z.jpg'] , Session::get('fb_page_access_token'));
+    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+    echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
+
+    $post_id = $response->getGraphNode()->getField('id');
+
+    dd($post_id);
+
+    // ------------- Add image to post ----------------
+
+});
+
+Route::get('/facebook/test/get_post_likes', function(SammyK\LaravelFacebookSdk\LaravelFacebookSdk $fb)
+{
+
+    try {
+        $response = $fb->post('/1857730571156494_1883534108576140/likes', [], Session::get('fb_page_access_token'));
+    } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+        dd($e->getMessage());
+    }
+
+    echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
+    die();
 
 });
 
