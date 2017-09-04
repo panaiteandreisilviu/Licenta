@@ -45,8 +45,7 @@ class PostController extends Controller
             $posts = $tag->posts;
         }
 
-        $publishedPostCount = Post::all()->where('published', '=', '1')->count();
-        return view('frontpage.posts.index', compact('posts', 'publishedPostCount'));
+        return view('frontpage.posts.index', compact('posts'));
     }
 
     public function indexAdmin() {
@@ -121,7 +120,7 @@ class PostController extends Controller
 
         if(request('published_facebook') ){
             try{
-                $post->publishFacebook();
+                /App/Facebook::createPost($post);
             } catch(\Exception $e){
                 $request->session()->flash('warning_message', 'Facebook: ' . $e->getMessage());
             }

@@ -34,30 +34,18 @@ class Facebook extends Model
 
     }
 
-    // ---------------------------------------------
-
-    public static function addPost(Post $post){
-
-        if(!$fb_user_access_token) {
-            return array();
-        }
-
+    public static function createPost(Post $post)
+    {
         $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-
         try {
-            $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/feed', ['message' => 'Test post from sdk 3.... '] , Session::get('fb_page_access_token'));
+            $response = $fb->post('/' .  Session::get('fb_page_app_id') .
+                '/photos', ['caption' => $post->title . "\n\n<br>" . $post->body , 'url' => 'https://c1.staticflickr.com/1/85/209708058_b5a5fb07a6_z.jpg'] , Session::get('fb_page_access_token'));
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             dd($e->getMessage());
         }
 
-
-        echo '<pre>' . print_r($response->getGraphNode(),1) . '<pre>';
-
         $post_id = $response->getGraphNode()->getField('id');
-
-        dd($post_id);
+        $post->facebook_post_id = $post_id;
+        $post->save();
     }
-
-    // ---------------------------------------------
-
 }

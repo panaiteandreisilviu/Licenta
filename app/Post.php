@@ -13,9 +13,7 @@ class Post extends Model
 {
     use Notifiable;
 
-    protected $fillable = ['title', 'body', 'user_id', 'image_path', 'published', 'published_at', 'published_twitter', 'published_facebook'];
-
-    // CE SE POATE SALVA CU POST::create([]);
+    protected $fillable = ['title', 'body', 'user_id', 'image_path', 'published', 'published_at', 'published_twitter', 'published_facebook']; // CE SE POATE SALVA CU POST::create([]);
     //protected $guarded = ['id']; // CE NU SE POATE SALVA CU POST::create([]);
 
     public function user(){
@@ -72,44 +70,4 @@ class Post extends Model
             return null;
         }
     }
-
-    /**
-     * Post to Facebook
-     * @return bool
-     */
-    public function publishFacebook(){
-
-        $page_access_token = Session::get('fb_page_access_token');
-        $page_id = Session::get('fb_page_app_id');
-
-        if(!$page_id) {
-            throw new Exception('Please set the page id');
-        }
-
-        if(!$page_access_token) {
-            throw new Exception('Please set the page access token');
-        }
-
-
-        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-
-        /*try {
-            $response = $fb->post("/$page_id/feed", ['message' => $this->body] , $page_access_token);
-        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-            dd($e->getMessage());
-        }*/
-
-        $response = $fb->post("/$page_id/feed", ['message' => $this->body] , $page_access_token);
-
-        $facebook_post_id = $response->getGraphNode()->getField('id');
-        dd($facebook_post_id);
-
-        $this->facebook_post_id = $facebook_post_id;
-
-        $this->save();
-
-        return true;
-
-    }
-
 }
