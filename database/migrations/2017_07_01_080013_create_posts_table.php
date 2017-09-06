@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->integer('published_twitter')->default(0);
             $table->integer('published_facebook')->default(0);
             $table->timestamp('published_at')->nullable();
-            $table->timestamp('facebook_post_id')->nullable();
+            $table->text('facebook_post_id')->nullable();
             $table->string('image_path')->nullable();
             $table->timestamps();
         });

@@ -43,12 +43,11 @@ class PostPublished extends Notification
     public function toTwitter($post) {
 //        return new TwitterStatusUpdate($post->title .' https://laravel-news.com/'. $post->uri, [$post->featured_image]);
         if($post->image_path) {
-            return (new TwitterStatusUpdate($post->title . " wwww.panaiteandrei.ml/posts/" . $post->id , $post->body))
+            return (new TwitterStatusUpdate($post->title . " www.panaiteandrei.ml/post/" . $post->id , $post->body))
                 ->withImage(public_path('storage/post_images/' . $post->image_path));
-        } else{
-            return (new TwitterStatusUpdate($post->title . " wwww.panaiteandrei.ml", $post->body));
+        } else {
+            return (new TwitterStatusUpdate($post->title . " www.panaiteandrei.ml/post/" . $post->id, $post->body));
         }
-
     }
 
     public function toFacebookPoster($notifiable) {

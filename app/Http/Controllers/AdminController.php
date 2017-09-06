@@ -28,7 +28,9 @@ class AdminController extends Controller
         $roleCount = Role::all()->count();
         $permissionCount = Permission::all()->count();
 
-        return view('admin.main.index', compact('userCount', 'postCount', 'roleCount', 'permissionCount'));
+        $facebookPosts = Post::whereNotNull('facebook_post_id')->get();
+
+        return view('admin.main.index', compact('userCount', 'postCount', 'roleCount', 'permissionCount', 'facebookPosts'));
     }
 
     /**

@@ -37,9 +37,20 @@ class Facebook extends Model
     public static function createPost(Post $post)
     {
         $fb = \App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
-        try {
+        if(!Session::get('fb_page_access_token')){
+            $request->session()->flash('warning_message', 'Could not post to Facebook. No page access token defined.');
+            return;
+        }
+
+        /*try {
             $response = $fb->post('/' .  Session::get('fb_page_app_id') .
                 '/photos', ['caption' => $post->title . "\n\n<br>" . $post->body , 'url' => 'https://c1.staticflickr.com/1/85/209708058_b5a5fb07a6_z.jpg'] , Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }*/
+
+        try {
+            $response = $fb->post('/' .  Session::get('fb_page_app_id') . '/feed', ['message' => $post->title . "\n\n<br>" . $post->body] , Session::get('fb_page_access_token'));
         } catch(\Facebook\Exceptions\FacebookSDKException $e) {
             dd($e->getMessage());
         }

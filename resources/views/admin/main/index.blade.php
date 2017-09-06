@@ -71,72 +71,38 @@
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="postsTable" class="table table-bordered table-hover">
-
                     <thead>
-                    <tr>
-                        <th>Post id</th>
-                        <th>Post title</th>
-                        <th>Published on</th>
-                        <th>Likes</th>
-                        <th>Comments</th>
-                        <th>Shares</th>
-                        <th>Post stories</th>
-                        <th>Post storytellers</th>
-                        <th style="max-width:110px">Actions</th>
-                    </tr>
+                        <tr>
+                            <th>Post id</th>
+                            <th>Post title</th>
+                            <th>Published on</th>
+                            <th>Likes</th>
+                            <th>Comments</th>
+                            <th>Shares</th>
+                            <th>Post stories</th>
+                            <th>Post storytellers</th>
+                            <th style="max-width:110px">Actions</th>
+                        </tr>
                     </thead>
                     <tbody>
+                        @foreach($facebookPosts as $post)
                         <tr>
-                            <td>1888373361425548</td>
-                            <td>Sustinere licenta si disertatie – Sesiunea septembrie 2017</td>
-                            <td>31.08.2017</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>1</td>
-                            <td>1</td>
+                            <td>{{$post->facebook_post_id}}</td>
+                            <td>{{$post->title}}</td>
+                            <td>{{$post->published_at ? \Carbon\Carbon::parse($post->published_at)->format('d.m.Y') : '-'}}</td>
+                            <td>{{$post->facebook_like_count()}}</td>
+                            <td>{{$post->facebook_comment_count()}}</td>
+                            <td>{{$post->facebook_share_count()}}</td>
+                            <td>{{$post->facebook_post_stories_count()}}</td>
+                            <td>{{$post->facebook_post_storytellers_count()}}</td>
                             <td>
-                                <a href="/admin/posts/edit" class="btn btn-primary btn-xs">
-                                    <i class="fa fa-facebook"></i> View
-                                </a>
+                                <a href="https://www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-primary btn-xs"> <i class="fa fa-facebook"></i> View </a>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>1888373361422354</td>
-                            <td>Program de masterat Financial Computing</td>
-                            <td>31.08.2017</td>
-                            <td>25</td>
-                            <td>6</td>
-                            <td>10</td>
-                            <td>5</td>
-                            <td>3</td>
-                            <td>
-                                <a href="/admin/posts/edit" class="btn btn-primary btn-xs">
-                                    <i class="fa fa-facebook"></i> View
-                                </a>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>1888373361422354</td>
-                            <td>Secretariat – Program August 2017</td>
-                            <td>28.07.2017</td>
-                            <td>30</td>
-                            <td>12</td>
-                            <td>7</td>
-                            <td>4</td>
-                            <td>2</td>
-                            <td>
-                                <a href="/admin/posts/edit" class="btn btn-primary btn-xs">
-                                    <i class="fa fa-facebook"></i> View
-                                </a>
-                            </td>
-                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                     <tr>
-
                     </tr>
                     </tfoot>
                 </table>

@@ -55,6 +55,94 @@ class Post extends Model
             ->toArray();
     }
 
+    /*-------------------------------------------------*/
+
+    public function facebook_like_count()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->get("/{$this->facebook_post_id}/likes", Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $likes = $response->getGraphEdge()->asArray();
+        return $likes ? count($likes) : 0;
+    }
+
+    /*-------------------------------------------------*/
+
+    public function facebook_comment_count()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->get("/{$this->facebook_post_id}/comments", Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $comments = $response->getGraphEdge()->asArray();
+        return $comments ? count($comments) : 0;
+    }
+
+    /*-------------------------------------------------*/
+
+    public function facebook_share_count()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->get("/{$this->facebook_post_id}/sharedposts", Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $shares = $response->getGraphEdge()->asArray();
+        return $shares ? count($shares) : 0;
+    }
+
+    /*-------------------------------------------------*/
+
+    public function facebook_post_stories_count()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->get("/{$this->facebook_post_id}/insights/post_stories", Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $stories = $response->getGraphEdge()->asArray();
+        return isset($stories[0]['values']['0']['value']) ? $stories[0]['values']['0']['value'] : 0;
+    }
+
+    /*-------------------------------------------------*/
+
+    public function facebook_post_storytellers_count()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->get("/{$this->facebook_post_id}/insights/post_storytellers", Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $stories = $response->getGraphEdge()->asArray();
+        return isset($stories[0]['values']['0']['value']) ? $stories[0]['values']['0']['value'] : 0;
+    }
+
+    /*-------------------------------------------------*/
+
+
     /**
      * Get published_at as date
      *

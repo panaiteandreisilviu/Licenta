@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facebook;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
@@ -94,12 +95,14 @@ class PostController extends Controller
 
         // ------------------ SAVE POST ------------------
 
-        if(request('published')) {
+        if(request('published') || request('published_twitter') || request('published_facebook')) {
             $published_at = new Carbon();
             $published_at = $published_at->format('Y-m-d H:i:s');
         } else {
             $published_at = null;
         }
+
+
 
         Post::create([
             'title' => request('title'),
@@ -117,7 +120,7 @@ class PostController extends Controller
         // ------------------ PUBLISH POST FACEBOOK TWITTER ------------------
 
         if(request('published_twitter')){
-            //$post->notify(new PostPublished($post));
+            $post->notify(new PostPublished($post));
         }
 
         if(request('published_facebook') ){
@@ -127,8 +130,6 @@ class PostController extends Controller
                 $request->session()->flash('warning_message', 'Facebook: ' . $e->getMessage());
             }
         }
-
-
 
         // ------------------ ATTACH TAGS ------------------
 
@@ -198,11 +199,25 @@ class PostController extends Controller
         }
 
 
-        if(!$post->published && request('published')){
+        if((!$post->published && request('published')) || (!$post->published && request('published_twitter')) || (!$post->published && request('published_facebook')) ) {
             $published_at = new Carbon();
             $published_at = $published_at->format('Y-m-d H:i:s');
-        } else{
+        } else {
             $published_at = $post->published_at;
+        }
+
+        // Publish post to twitter
+        if(request('published_twitter') && $post->published_twitter == 0){
+            $post->notify(new PostPublished());
+        }
+
+        // Publish post to twitter
+        if(request('published_facebook') && $post->published_facebook == 0){
+            try {
+                \App\Facebook::createPost($post);
+            } catch(\Exception $e) {
+                $request->session()->flash('warning_message', 'Facebook: ' . $e->getMessage());
+            }
         }
 
         $post->title = request('title');
@@ -214,10 +229,6 @@ class PostController extends Controller
         $post->published_facebook = request('published_facebook') ? 1 : 0;
         $post->image_path = $imageHashName;
 
-        // Publish post
-//        if(request('published') == 1 && !request('published') ){
-//            $post->notify(new PostPublished());
-//        }
 
         $post->save();
 

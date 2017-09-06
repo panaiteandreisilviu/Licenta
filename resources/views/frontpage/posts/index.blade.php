@@ -69,7 +69,7 @@
 
                                 <!-- Social sharing buttons -->
                                 @if($post->facebook_post_id)
-                                    <a href="www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-default btn-xs">View on Facebook</a>
+                                    <a href="https://www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-facebook"></i> View on Facebook</a>
                                 @endif
                             </div>
                             <!-- /.box-body -->
