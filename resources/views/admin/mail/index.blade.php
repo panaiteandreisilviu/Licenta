@@ -1,5 +1,6 @@
-@extends('layouts.admin.default')
+@extends('layouts.admin.default', ['title' => 'Mail inbox', 'subtitle' => ''])
 @section('content')
+
     <div class="row">
         <div class="col-md-3">
             <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Compose</a>
@@ -18,9 +19,9 @@
                         <li class="active"><a href="#"><i class="fa fa-inbox"></i> Inbox
                                 <span class="label label-primary pull-right">12</span></a></li>
                         <li><a href="#"><i class="fa fa-envelope-o"></i> Sent</a></li>
+                        <li><a href="#"><i class="fa fa-star-o"></i> Important</a></li>
                         <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-                        <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
-                        </li>
+                        <li><a href="#"><i class="fa fa-minus-square-o"></i> Spam</a></li>
                         <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
                     </ul>
                 </div>
@@ -29,7 +30,7 @@
             <!-- /. box -->
             <div class="box box-solid">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Labels</h3>
+                    <h3 class="box-title">Inboxes</h3>
 
                     <div class="box-tools">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -38,9 +39,16 @@
                 </div>
                 <div class="box-body no-padding">
                     <ul class="nav nav-pills nav-stacked">
-                        <li><a href="#"><i class="fa fa-circle-o text-red"></i> Important</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> Promotions</a></li>
-                        <li><a href="#"><i class="fa fa-circle-o text-light-blue"></i> Social</a></li>
+                        @foreach($mailInboxes as $mailInbox)
+                            <li>
+                                <a href="/mail?inbox={{$mailInbox->id}}">
+                                    <div class="email-circle pull-left" style="color:{{$mailInbox->getLabelContrastColor()}}; background-color:{{$mailInbox->label_color}};">
+                                        {{substr($mailInbox->label_name, 0 , 1)}}
+                                    </div> &nbsp;&nbsp;
+                                    <span style="line-height: 25px;">{{$mailInbox->label_name}} [{{$mailInbox->type}}]</span>
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- /.box-body -->
@@ -54,10 +62,10 @@
                     <h3 class="box-title">Inbox</h3>
 
                     <div class="box-tools pull-right">
-                        <div class="has-feedback">
+                        {{--<div class="has-feedback">
                             <input type="text" class="form-control input-sm" placeholder="Search Mail">
                             <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                        </div>
+                        </div>--}}
                     </div>
                     <!-- /.box-tools -->
                 </div>
@@ -75,156 +83,52 @@
                         <!-- /.btn-group -->
                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                         <div class="pull-right">
-                            1-50/200
+                            {{--1-50/200
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                            </div>
+                            </div>--}}
                             <!-- /.btn-group -->
                         </div>
                         <!-- /.pull-right -->
                     </div>
-                    <div class="table-responsive mailbox-messages">
-                        <table class="table table-hover table-striped">
-                            <tbody>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"></td>
-                                <td class="mailbox-date">5 mins ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">28 mins ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">11 hours ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"></td>
-                                <td class="mailbox-date">15 hours ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">Yesterday</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">2 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">2 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"></td>
-                                <td class="mailbox-date">2 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"></td>
-                                <td class="mailbox-date">2 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"></td>
-                                <td class="mailbox-date">2 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">4 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"></td>
-                                <td class="mailbox-date">12 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star-o text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">12 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">14 days ago</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox"></td>
-                                <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                                <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                                <td class="mailbox-subject"><b>AdminLTE 2.0 Issue</b> - Trying to find a solution to this problem...
-                                </td>
-                                <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                <td class="mailbox-date">15 days ago</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
+                    <div class="table-responsive mailbox-messages" style="padding: 10px;overflow: hidden;">
+                        @if(count($mails))
+
+                            <table id="mailsTable" class="table table-hover table-striped">
+                                <thead style="display:none">
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Title</th>
+                                    <th>Published</th>
+                                    <th>Published at</th>
+                                    <th>Author</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($mails as $mail)
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td class="mailbox-star">
+                                                <div class="email-circle" style="color:{{$mail->mailInbox()->getLabelContrastColor()}}; background-color:{{$mail->mailInbox()->label_color}};">
+                                                    {{substr($mail->mailInbox()->label_name, 0 , 1)}}
+                                                </div>
+                                            </td>
+                                            <td class="mailbox-name"><a href="/mail/{{$mail->id}}">{{$mail->from_name ? $mail->from_name : $mail->from_email}}</a></td>
+                                            <td class="mailbox-subject">
+                                                <b>{{ substr(strip_tags($mail->subject), 0, 27) . (strlen($mail->subject) > 27 ? '...' : '') }}</b> -
+                                                {!! substr(strip_tags($mail->body), 0, 27) . (strlen($mail->body) > 27 ? '...' : '') !!}
+                                            </td>
+                                            {{--<td class="mailbox-attachment"></td>--}}
+                                            <td class="mailbox-date">{{\Carbon\Carbon::parse($mail->sent_on)->diffForHumans()}}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <!-- /.table -->
+
+                        @endif
+
                     </div>
                     <!-- /.mail-box-messages -->
                 </div>
@@ -242,11 +146,11 @@
                         <!-- /.btn-group -->
                         <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                         <div class="pull-right">
-                            1-50/200
+                            {{--1-50/200
                             <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
                                 <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                            </div>
+                            </div>--}}
                             <!-- /.btn-group -->
                         </div>
                         <!-- /.pull-right -->
@@ -257,4 +161,20 @@
         </div>
         <!-- /.col -->
     </div>
+    <!-- /.row -->
+
+    <script>
+        $(function(){
+            $('#mailsTable').DataTable({
+//            "paging": true,
+//            "lengthChange": false,
+//            "searching": false,
+//            "ordering": true,
+//            "info": true,
+//            "autoWidth": false
+            });
+        })
+    </script>
+
+
 @endsection

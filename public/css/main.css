@@ -1,0 +1,9 @@
+.email-circle{
+    height:25px !important;
+    width:25px !important;
+    border-radius: 50% !important;
+    text-align: center !important;
+    line-height: 25px !important;
+    font-weight: bold !important;
+    font-size:12px !important;
+}

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Mail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +36,23 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with(compact('archives', 'userArchives', 'postCount', 'tags', 'tagsCount'));
         });
+
+        // --------------------------------
+
+        view()->composer('layouts.top-nav.notifications', function($view){
+
+            if(Auth::check()){
+                $unseenMails = Mail::where('user_id', Auth::user()->id)
+                    ->where('unseen', 1)
+                    ->orderBy('sent_on', 'DESC')
+                    ->get();
+            } else{
+                $unseenMails = null;
+            }
+
+            $view->with(compact('unseenMails'));
+        });
+
     }
 
     /**

@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password_confirmation" class="col-sm-3 control-label">Retype new password</label>
+                            <label for="password_confirmation" class="col-sm-3 control-label">Retype password</label>
                             <div class="col-sm-8">
                                 <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Password confirmation">
                             </div>

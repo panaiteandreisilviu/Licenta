@@ -34,8 +34,7 @@
             <li><a href="/admin/tags"><i class="fa fa-tags"></i> <span>Tags</span></a></li>
             <li><a href="/admin/roles"><i class="fa fa-male"></i> <span>Roles</span></a></li>
             <li><a href="/admin/permissions"><i class="ion ion ion-unlocked"></i> <span>Permissions</span></a></li>
-
-
+            <li><a href="/admin/mail_inboxes"><i class="fa fa-inbox"></i> <span>Mail Inboxes</span></a></li>
             <li><a href="/admin/settings"><i class="fa fa-key"></i> <span>Settings and API Keys</span></a></li>
 
             <li><a href="/"><i class="fa fa-home"></i> <span>Landing page</span></a></li>

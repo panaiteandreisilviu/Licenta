@@ -88,6 +88,15 @@ Route::post('admin/role_permission', "RolePermission@edit");
 // ------ MAIL
 
 Route::get('/admin/mail', "MailController@index");
+Route::get('/mail', "MailController@index");
+
+// ------ MAIL INBOXES
+
+Route::resource('/admin/mail_inboxes', "MailInboxController");
+
+// ------ MAIL INBOX ASSOCIATIONS
+Route::get('/admin/mail_inbox_associations/{mail_inbox}', "MailInboxAssociationController@index");
+Route::post('/admin/mail_inbox_associations_save/{mail_inbox}', "MailInboxAssociationController@update");
 
 
 // ----------------- LOGIN / REGISTRATION -----------------------

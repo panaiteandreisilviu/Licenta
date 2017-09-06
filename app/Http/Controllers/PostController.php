@@ -27,10 +27,10 @@ class PostController extends Controller
 //        $posts = \App\Post::all()->sortByDesc("created_at");
         $posts = \App\Post::latest();
 
-        if($month = request('month')){
+        if($month = request('month')) {
             $posts->whereMonth('created_at', $month);
         }
-        if($year = request('year')){
+        if($year = request('year')) {
             $posts->whereYear('created_at', $year);
         }
 
@@ -40,12 +40,14 @@ class PostController extends Controller
 
         $posts = $posts->get();
 
-        if($tag_name = request('tag')){
+        if($tag_name = request('tag')) {
             $tag = Tag::where('name', $tag_name)->first();
             $posts = $tag->posts;
         }
 
-        return view('frontpage.posts.index', compact('posts'));
+        $publishedPostCount = Post::all()->where('published', '1');
+
+        return view('frontpage.posts.index', compact('posts', 'publishedPostCount'));
     }
 
     public function indexAdmin() {
@@ -92,10 +94,10 @@ class PostController extends Controller
 
         // ------------------ SAVE POST ------------------
 
-        if(request('published')){
+        if(request('published')) {
             $published_at = new Carbon();
             $published_at = $published_at->format('Y-m-d H:i:s');
-        } else{
+        } else {
             $published_at = null;
         }
 
@@ -120,7 +122,7 @@ class PostController extends Controller
 
         if(request('published_facebook') ){
             try{
-                /App/Facebook::createPost($post);
+                \App\Facebook::createPost($post);
             } catch(\Exception $e){
                 $request->session()->flash('warning_message', 'Facebook: ' . $e->getMessage());
             }
