@@ -67,77 +67,73 @@
                                 <!-- Attachment -->
                                 <!-- /.attachment-block -->
 
-                                <!-- Social sharing buttons -->
+
+
                                 @if($post->facebook_post_id)
+                                <!-- Social sharing buttons -->
+                                    @if(Session::get('fb_page_access_token'))
+                                        <a href="/post/{{$post->id}}/like" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Like</a>&nbsp;
+                                        <span class="text-muted">{{$post->facebook_like_count()}} likes - {{$post->facebook_comment_count()}} comments</span>
+                                    @endif
+
                                     <a href="https://www.facebook.com/{{$post->facebook_post_id}}" target="_blank" class="btn btn-primary btn-xs pull-right"> <i class="fa fa-facebook"></i> View on Facebook</a>
                                 @endif
                             </div>
                             <!-- /.box-body -->
-                        {{--<div class="box-footer box-comments">--}}
-                        {{--<div class="box-comment">--}}
-                        {{--<!-- User image -->--}}
-                        {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user3-128x128.jpg" alt="User Image">--}}
 
-                        {{--<div class="comment-text">--}}
-                        {{--<span class="username">--}}
-                        {{--Maria Gonzales--}}
-                        {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
-                        {{--</span><!-- /.username -->--}}
-                        {{--It is a long established fact that a reader will be distracted--}}
-                        {{--by the readable content of a page when looking at its layout.--}}
-                        {{--</div>--}}
-                        {{--<!-- /.comment-text -->--}}
-                        {{--</div>--}}
-                        {{--<!-- /.box-comment -->--}}
-                        {{--<div class="box-comment">--}}
-                        {{--<!-- User image -->--}}
-                        {{--<img class="img-circle img-sm" src="AdminLTE-2.3.11/dist/img/user5-128x128.jpg" alt="User Image">--}}
+                        @if(Session::get('fb_page_access_token') && $post->facebook_comment_count() > 0)
+                                <div class="box-footer box-comments">
+                                    @foreach($post->facebook_comments() as $comment)
+                                        <div class="box-comment">
+                                        <!-- User image -->
+                                        <img class="img-circle img-sm" style="border:1px solid #dfdfdf" src="storage/avatars/default" alt="User Image">
 
-                        {{--<div class="comment-text">--}}
-                        {{--<span class="username">--}}
-                        {{--Nora Havisham--}}
-                        {{--<span class="text-muted pull-right">8:03 PM Today</span>--}}
-                        {{--</span><!-- /.username -->--}}
-                        {{--The point of using Lorem Ipsum is that it has a more-or-less--}}
-                        {{--normal distribution of letters, as opposed to using--}}
-                        {{--'Content here, content here', making it look like readable English.--}}
-                        {{--</div>--}}
-                        {{--<!-- /.comment-text -->--}}
-                        {{--</div>--}}
-                        {{--<!-- /.box-comment -->--}}
-                        {{--</div>--}}
-                        <!-- /.box-footer -->
-
-
-                        {{--<div class="box-footer">
-                            <form action="#" method="post">
-                                <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user() ? Auth::user()->id : null}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
-                                <div class="img-push">
-                                    <input type="text" class="form-control input-sm" placeholder="Press enter to post comment">
+                                        <div class="comment-text">
+                        <span class="username">
+                        {{$comment['from']['name']}}
+                        <span class="text-muted pull-right">{{\Carbon\Carbon::parse($comment['created_time']->format('Y-m-d H:i:s'))->diffForHumans()}}</span>
+                        </span><!-- /.username -->
+                                            {{$comment['message']}}
+                                        </div>
+                                        <!-- /.comment-text -->
+                                    </div>
+                                    @endforeach
                                 </div>
-                            </form>
-                        </div>--}}
-
-
+                        @endif
                         <!-- /.box-footer -->
+
+                        @if(Session::get('fb_page_access_token'))
+                            <div class="box-footer">
+                                <form action="/post/{{$post->id}}/comment" method="post">
+                                    {{csrf_field()}}
+                                    <img class="img-responsive img-circle img-sm" src="/storage/avatars/{{Auth::user() ? Auth::user()->id : null}}" onerror="this.src='/storage/avatars/default'" alt="Alt Text">
+                                    <div class="img-push">
+                                        <input type="text" name="comment" class="form-control input-sm" placeholder="Press enter to post comment">
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
+
+
+                                    <!-- /.box-footer -->
+                                    </div>
+                                @endif
+
+                            @endforeach
+                        </div>
+
+                    @else
+                        <div class="col-xs-12">
+                            <div class="alert alert-info alert-dismissible" style="background-color: #efefef !important; border:1px solid #bbbbbb; color:#444 !important;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <h4><i class="icon fa fa-info"></i> Info</h4>
+                                No posts have been published yet.
+                            </div>
                         </div>
                     @endif
 
-                @endforeach
-            </div>
-
-        @else
-            <div class="col-xs-12">
-                <div class="alert alert-info alert-dismissible" style="background-color: #efefef !important; border:1px solid #bbbbbb; color:#444 !important;">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-info"></i> Info</h4>
-                    No posts have been published yet.
+                <div class="col-sm-4 hidden-xs">
+                    @include('layouts.top-nav.post_sidebar')
                 </div>
-            </div>
-        @endif
 
-    <div class="col-sm-4 hidden-xs">
-        @include('layouts.top-nav.post_sidebar')
-    </div>
-
-@endsection
+            @endsection

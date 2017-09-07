@@ -238,6 +238,31 @@ class PostController extends Controller
     }
 
     /**
+     * Like post on Facebook
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function likeOnFacebook(Post $post)
+    {
+        $post->like_on_facebook();
+        return back();
+    }
+
+    /**
+     * Like post on Facebook
+     *
+     * @param  \App\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function commentOnFacebook(Post $post)
+    {
+        $post->comment_on_facebook(request('comment'));
+        return back();
+    }
+
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Post  $post

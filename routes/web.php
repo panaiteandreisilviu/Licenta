@@ -18,6 +18,8 @@ Route::get('/', "PostController@index")->name("frontpage");
 Route::get('/home', function(){ return redirect('/'); });
 Route::get('/posts', "PostController@index");
 Route::get('/post/{post}', "PostController@show");
+Route::get('/post/{post}/like', "PostController@likeOnFacebook");
+Route::post('/post/{post}/comment', "PostController@commentOnFacebook");
 
 // ------ PROFILE
 

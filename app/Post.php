@@ -88,6 +88,25 @@ class Post extends Model
         $comments = $response->getGraphEdge()->asArray();
         return $comments ? count($comments) : 0;
     }
+    /*-------------------------------------------------*/
+
+    public function facebook_comments()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->get("/{$this->facebook_post_id}/comments", Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+
+        $comments = $response->getGraphEdge()->asArray();
+        if(count($comments > 3)){
+            $comments = array_slice($comments, -3, 3, true);
+        }
+        return $comments;
+    }
 
     /*-------------------------------------------------*/
 
@@ -142,6 +161,32 @@ class Post extends Model
 
     /*-------------------------------------------------*/
 
+
+    public function like_on_facebook()
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->post("/{$this->facebook_post_id}/likes", [], Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function comment_on_facebook($comment)
+    {
+
+        $fb = App::make('SammyK\LaravelFacebookSdk\LaravelFacebookSdk');
+
+        try {
+            $response = $fb->post("/{$this->facebook_post_id}/comments", ['message' => $comment], Session::get('fb_page_access_token'));
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    /*-------------------------------------------------*/
 
     /**
      * Get published_at as date
