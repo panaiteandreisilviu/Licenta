@@ -3,10 +3,7 @@ Modele
  - fisierele din [app/](app/)
  
 Controllere
-- /app/Http/Controllers/ cu exceptia folderului Auth
+- [app/Http/Controllers/](app/Http/Controllers/) cu exceptia folderului Auth
   
 View-uri
-- folderele admin, frontpage si layouts din /resources/views/
-   
-Migratii baza de date
-- 
+- [resources/views/](resources/views/) (folderele admin, frontpage si layouts)
